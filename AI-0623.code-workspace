@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "name": "AI-0623",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "liveServer.settings.port": 5501,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.wait": 200
+  },
+  "extensions": {
+    "recommendations": [
+      "ritwickdey.LiveServer"
+    ]
+  }
+}

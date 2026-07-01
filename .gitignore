@@ -1,0 +1,19 @@
+# Local development tools and agent metadata
+.agents/
+.codex/
+.od-skills/
+.tools/
+NVIDIA Corporation/
+
+# Local logs and generated metadata
+*.log
+*.artifact.json
+
+# Raw/source videos are kept locally. Web-ready copies are deployed instead.
+mp4/l2/*.avi
+mp4/l2/*.mp4
+mp4/l4/*.mp4
+
+# Operating-system files
+Thumbs.db
+.DS_Store
