@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>算法功能 - Streamax</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --background: 168 26% 5%; --foreground: 0 0% 100%; --card: 170 20% 8%; --secondary: 165 18% 14%; --muted-foreground: 164 11% 70%; --border: 164 18% 25%; --ring: 174 76% 48%; --font: 'Inter', 'Microsoft YaHei', 'PingFang SC', sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { min-height: 100%; background: hsl(var(--background)); }
+    body { min-height: 100vh; overflow-x: hidden; color: hsl(var(--foreground)); font-family: var(--font); background: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px), radial-gradient(circle at 50% -10%, rgba(47,228,202,.2), transparent 34rem), linear-gradient(145deg, #030706 0%, #071411 42%, #050807 100%); background-size: 42px 42px, 42px 42px, auto, auto; background-attachment: fixed; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { text-wrap: balance; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .nav-shell { position: sticky; top: 0; z-index: 20; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); border-bottom: 1px solid hsl(var(--border) / .25); background: rgba(3, 7, 6, .82); backdrop-filter: blur(14px); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px clamp(24px, 5vw, 72px); }
+    .brand-logo { display: block; width: 167px; height: auto; }
+    .back-link { color: hsl(var(--muted-foreground)); font-size: .88rem; transition: color .2s ease; }
+    .back-link:hover, .back-link:focus-visible { color: hsl(var(--foreground)); }
+    .hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: start; padding: 86px 0 46px; }
+    .hero-icon { display: grid; width: 92px; height: 92px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 24px; background: hsl(var(--card) / .78); color: hsl(var(--ring)); box-shadow: 0 24px 70px rgba(0,0,0,.28); }
+    .hero-icon svg { width: 46px; height: 46px; }
+    .eyebrow { margin-bottom: 14px; color: hsl(var(--ring)); font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin-bottom: 18px; font-size: clamp(3rem, 7vw, 6.1rem); line-height: .96; font-weight: 560; letter-spacing: -.055em; }
+    .lead { max-width: 780px; color: hsl(var(--muted-foreground)); font-size: clamp(1rem, 1.6vw, 1.16rem); line-height: 1.75; }
+    .status { display: inline-flex; margin-top: 22px; padding: 8px 11px; border: 1px solid hsl(var(--border)); border-radius: 999px; color: hsl(var(--muted-foreground)); background: hsl(var(--secondary) / .55); font-size: .72rem; letter-spacing: .04em; }
+    .content { padding: 12px 0 88px; }
+    .panel { padding: clamp(24px, 4vw, 36px); border: 1px solid hsl(var(--border) / .8); border-radius: 18px; background: hsl(var(--card) / .72); box-shadow: 0 24px 70px rgba(0,0,0,.22); backdrop-filter: blur(14px); }
+    .panel-head { display: grid; grid-template-columns: minmax(0, .75fr) minmax(280px, 1.25fr); gap: 28px; align-items: end; margin-bottom: 28px; }
+    .panel-head h2 { font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.045em; }
+    .panel-head p { color: hsl(var(--muted-foreground)); font-size: .9rem; line-height: 1.7; }
+    .roadmap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .roadmap-card { min-height: 150px; padding: 18px; border: 1px dashed hsl(var(--border)); border-radius: 12px; background: hsl(var(--secondary) / .38); }
+    .roadmap-card strong { display: block; margin-bottom: 26px; font-size: .94rem; }
+    .roadmap-card span { color: hsl(var(--muted-foreground)); font-size: .75rem; }
+    .cta { display: inline-flex; margin-top: 22px; padding: 12px 16px; border-radius: 10px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-size: .86rem; font-weight: 700; }
+    @media (max-width: 760px) { .shell { width: min(100% - 28px, 680px); } .brand-logo { width: 132px; } .hero { grid-template-columns: 1fr; padding-top: 58px; } .hero-icon { width: 72px; height: 72px; border-radius: 18px; } .hero-icon svg { width: 36px; height: 36px; } .panel-head, .roadmap-grid { grid-template-columns: 1fr; } .roadmap-card { min-height: 122px; } }
+  </style>
+  <link rel="stylesheet" href="detail-background.css?v=20260702-3">
+</head>
+<body>
+  <div class="shell">
+    <div class="nav-shell">
+      <nav class="nav">
+        <a href="dididi.html#flywheel"><img class="brand-logo" src="assets/streamax-logo.png" alt="Streamax"></a>
+        <a class="back-link" id="libraryBack" href="detail.html?topic=vehicle-ai-algorithm">← 返回算法库</a>
+      </nav>
+    </div>
+    <header class="hero">
+      <div class="hero-icon" id="algorithmIcon"></div>
+      <div>
+        <div class="eyebrow" id="algorithmGroup">算法功能</div>
+        <h1 id="algorithmName">算法功能</h1>
+        <p class="lead" id="algorithmSummary"></p>
+        <span class="status" id="algorithmStatus">专属功能页面 · 内容框架已就绪</span>
+      </div>
+    </header>
+    <main class="content">
+      <section class="panel">
+        <div class="panel-head"><h2 id="structureTitle">页面内容框架</h2><p id="structureSummary">该页面已为后续功能说明、技术资料与演示内容预留结构。</p></div>
+        <div class="roadmap-grid" id="roadmapGrid"></div>
+        <a class="cta" id="libraryCta" href="detail.html?topic=vehicle-ai-algorithm">返回算法库</a>
+      </section>
+    </main>
+  </div>
+  <script src="i18n.js?v=20260702-3"></script>
+  <script src="algorithm-data.js?v=20260702-2"></script>
+  <script>
+    const LANG = window.StreamaxI18n.getLanguage();
+    const library = window.AlgorithmLibrary;
+    const requestedId = new URLSearchParams(location.search).get('id') || 'dms';
+    const algorithm = library.algorithms[requestedId] || library.algorithms.dms;
+    const group = library.groups.find(item => item.id === algorithm.group) || library.groups[0];
+    const name = LANG === 'en' ? algorithm.en : algorithm.zh;
+    const summary = LANG === 'en' ? algorithm.summaryEn : algorithm.summaryZh;
+    const groupName = LANG === 'en' ? group.en : group.zh;
+    const libraryHref = `detail.html?topic=vehicle-ai-algorithm&lang=${LANG}`;
+    const roadmap = LANG === 'en'
+      ? ['Inputs & Sensors', 'Detection Capabilities', 'Outputs & Events', 'Typical Scenarios', 'Edge Integration', 'Validation & Evidence']
+      : ['输入与传感器', '识别能力', '输出与事件', '典型场景', '端侧集成', '验证与依据'];
+    document.documentElement.lang = LANG === 'en' ? 'en' : 'zh-CN';
+    document.title = `${name} - Streamax`;
+    document.getElementById('algorithmIcon').innerHTML = library.iconSvg(algorithm.icon);
+    document.getElementById('algorithmGroup').textContent = groupName;
+    document.getElementById('algorithmName').textContent = name;
+    document.getElementById('algorithmSummary').textContent = summary;
+    document.getElementById('algorithmStatus').textContent = LANG === 'en' ? 'Dedicated function page · Content framework ready' : '专属功能页面 · 内容框架已就绪';
+    document.getElementById('structureTitle').textContent = LANG === 'en' ? 'Planned Page Structure' : '页面内容框架';
+    document.getElementById('structureSummary').textContent = LANG === 'en' ? 'The structure is ready for future functional explanations, technical material, and demonstration media.' : '该页面已为后续功能说明、技术资料与演示内容预留结构。';
+    document.getElementById('roadmapGrid').innerHTML = roadmap.map(item => `<article class="roadmap-card"><strong>${item}</strong><span>${LANG === 'en' ? 'Content planned' : '内容待补充'}</span></article>`).join('');
+    document.getElementById('libraryBack').href = libraryHref;
+    document.getElementById('libraryBack').textContent = LANG === 'en' ? '← Algorithm Library' : '← 返回算法库';
+    document.getElementById('libraryCta').href = libraryHref;
+    document.getElementById('libraryCta').textContent = LANG === 'en' ? 'Back to Algorithm Library' : '返回算法库';
+  </script>
+</body>
+</html>

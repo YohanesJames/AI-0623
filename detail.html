@@ -180,6 +180,30 @@
     @keyframes streamMove { from { transform: translateX(-10px) scaleX(0.4); opacity: 0; } 35% { opacity: 0.9; } to { transform: translateX(46px) scaleX(1); opacity: 0; } }
     @keyframes chipSpin { to { transform: rotate(360deg); } }
     @keyframes gpuLine { 0% { opacity: 0; filter: blur(2px); } 35% { opacity: 1; filter: blur(0); } 100% { opacity: 0; transform: translateX(42px); } }
+    .algorithm-catalog { display: none; margin-top: 24px; padding: 28px; border: 1px solid hsl(var(--border) / 0.8); border-radius: 18px; background: hsl(var(--card) / 0.72); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22); backdrop-filter: blur(14px); }
+    .algorithm-catalog.active { display: block; }
+    .catalog-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .catalog-kicker { display: block; margin-bottom: 10px; color: hsl(var(--ring)); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+    .catalog-head h2 { white-space: nowrap; text-wrap: nowrap; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; font-weight: 760; letter-spacing: -0.05em; }
+    .algorithm-groups { display: grid; gap: 18px; }
+    .algorithm-group { padding: 22px; border: 1px solid hsl(var(--border) / 0.65); border-radius: 14px; background: hsl(var(--background) / 0.28); }
+    .algorithm-group-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 18px; }
+    .algorithm-group-head h3 { margin-bottom: 6px; font-size: 1.08rem; font-weight: 760; letter-spacing: -0.02em; }
+    .algorithm-group-head p { color: hsl(var(--muted-foreground)); font-size: 0.8rem; line-height: 1.55; }
+    .algorithm-count { flex: 0 0 auto; padding: 6px 9px; border: 1px solid hsl(var(--border)); border-radius: 999px; color: hsl(var(--muted-foreground)); font-size: 0.7rem; }
+    .algorithm-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .algorithm-card { display: flex; min-height: 210px; flex-direction: column; padding: 18px; border: 1px solid hsl(var(--border) / 0.7); border-radius: 12px; background: hsl(var(--secondary) / 0.48); transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; }
+    .algorithm-card:hover, .algorithm-card:focus-visible { transform: translateY(-4px); border-color: hsl(var(--ring) / 0.65); background: hsl(var(--secondary) / 0.76); outline: none; }
+    .algorithm-card-icon { display: grid; width: 46px; height: 46px; place-items: center; margin-bottom: 20px; border: 1px solid hsl(var(--border)); border-radius: 12px; background: hsl(var(--background) / 0.64); color: hsl(var(--ring)); }
+    .algorithm-card-icon svg { width: 25px; height: 25px; }
+    .algorithm-card h4 { margin-bottom: 8px; font-size: 0.98rem; font-weight: 760; letter-spacing: -0.015em; }
+    .algorithm-card p { color: hsl(var(--muted-foreground)); font-size: 0.78rem; line-height: 1.58; }
+    .algorithm-card-link { margin-top: auto; padding-top: 18px; color: hsl(var(--ring)); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
+    .catalog-more { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; margin-top: 18px; padding: 18px 20px; border: 1px solid hsl(var(--border) / 0.75); border-radius: 14px; background: linear-gradient(90deg, hsl(var(--secondary) / 0.65), hsl(var(--secondary) / 0.38)); }
+    .catalog-more-icon { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 12px; color: hsl(var(--ring)); background: hsl(var(--background) / 0.6); }
+    .catalog-more-icon svg { width: 24px; height: 24px; }
+    .catalog-more strong { display: block; margin-bottom: 5px; font-size: 0.92rem; }
+    .catalog-more-badge { padding: 8px 11px; border: 1px solid hsl(var(--border)); border-radius: 999px; color: hsl(var(--ring)); font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
     .content { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr); gap: 28px; padding: 24px 0 88px; }
     .panel { background: hsl(var(--card) / 0.72); border: 1px solid hsl(var(--border) / 0.8); border-radius: 14px; padding: 28px; backdrop-filter: blur(14px); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22); }
     .panel h2 { font-size: 1.18rem; font-weight: 760; margin-bottom: 20px; letter-spacing: -0.02em; }
@@ -196,9 +220,10 @@
     .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 12px 16px; border-radius: 10px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-weight: 700; font-size: 0.9rem; }
     @media (max-width: 1380px) { .detail-nav-links { display: none; } .nav { grid-template-columns: 1fr auto; gap: 16px; } }
     @media (max-width: 900px) { .nav { padding-right: 24px; } }
-    @media (max-width: 860px) { .shell { width: min(100% - 28px, 680px); } .nav { padding: 14px 24px; } .brand-logo { width: 132px; } .hero { padding: 58px 0 34px; } .live-grid, .gpu-dashboard, .video-grid { grid-template-columns: 1fr; } .video-stage-head { align-items: flex-start; flex-direction: column; } .live-map, .gpu-core { min-height: 360px; } .gpu-stats { grid-template-columns: 1fr; } .content { grid-template-columns: 1fr; padding-bottom: 60px; } .panel { padding: 22px; } }
-    @media (max-width: 480px) { .nav { padding-right: 18px; } .brand-logo { width: 112px; } .back-link { font-size: 0; } .back-link::before { content: "←"; font-size: 1.1rem; } h1 { font-size: clamp(2.7rem, 14vw, 4rem); } }
+    @media (max-width: 860px) { .shell { width: min(100% - 28px, 680px); } .nav { padding: 14px 24px; } .brand-logo { width: 132px; } .hero { padding: 58px 0 34px; } .live-grid, .gpu-dashboard, .video-grid { grid-template-columns: 1fr; } .video-stage-head { align-items: flex-start; flex-direction: column; } .live-map, .gpu-core { min-height: 360px; } .gpu-stats { grid-template-columns: 1fr; } .algorithm-catalog { padding: 22px; } .catalog-more { grid-template-columns: auto 1fr; } .catalog-more-badge { grid-column: 2; justify-self: start; } .content { grid-template-columns: 1fr; padding-bottom: 60px; } .panel { padding: 22px; } }
+    @media (max-width: 480px) { .nav { padding-right: 18px; } .brand-logo { width: 112px; } .back-link { font-size: 0; } .back-link::before { content: "←"; font-size: 1.1rem; } h1 { font-size: clamp(2.7rem, 14vw, 4rem); } .catalog-head h2 { font-size: clamp(1rem, 5.2vw, 1.35rem); letter-spacing: -0.025em; } .catalog-more { grid-template-columns: 1fr; } .catalog-more-badge { grid-column: 1; } }
   </style>
+  <link rel="stylesheet" href="detail-background.css?v=20260702-3">
 </head>
 <body>
   <div class="shell">
@@ -278,6 +303,17 @@
         <div class="video-grid" id="videoGrid"></div>
       </div>
     </section>
+    <section class="algorithm-catalog" id="algorithmCatalog" aria-labelledby="algorithmCatalogTitle">
+      <div class="catalog-head">
+        <div><span class="catalog-kicker" id="algorithmCatalogKicker">算法目录</span><h2 id="algorithmCatalogTitle">车端算法功能</h2></div>
+      </div>
+      <div class="algorithm-groups" id="algorithmGroups"></div>
+      <div class="catalog-more">
+        <span class="catalog-more-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
+        <div><strong id="catalogMoreTitle">更多算法功能</strong></div>
+        <span class="catalog-more-badge" id="catalogMoreBadge">72+ 项能力</span>
+      </div>
+    </section>
     <main class="content">
       <div class="primary-column">
         <section class="panel" id="compliancePanel" hidden><h2 id="complianceTitle">法规合规</h2><div class="compliance-grid" id="complianceList"></div></section>
@@ -289,14 +325,15 @@
       </aside>
     </main>
   </div>
-  <script src="i18n.js?v=20260701-3"></script>
+  <script src="i18n.js?v=20260702-3"></script>
+  <script src="algorithm-data.js?v=20260702-2"></script>
   <script>
     const LANG = window.StreamaxI18n.getLanguage();
     const BASE_ZH = {
       'l2-product': ['业务落地与价值', 'L2 舱驾一体化 AEB', '集成座舱监测与自动驾驶辅助的系统级解决方案，实现驾驶员状态感知与紧急制动联动，显著降低事故风险。', ['风险识别|融合驾驶员状态、前向道路和车辆运动状态识别高风险场景。', '舱驾联动|将 DMS 与 AEB、ADAS 联动，形成主动安全回路。', '量产验证|面向客户车型完成联调、标定、测试和交付。'], ['L2|舱驾一体化辅助驾驶', '毫秒级|风险识别与联动', '可量产|面向真实车型集成'], ['疲劳驾驶联动|识别驾驶员异常状态并触发辅助提醒。', '前向碰撞风险|结合车内外信号降低追尾与误触风险。'], ['AEB','DMS','舱驾融合','主动安全']],
       'l4-product': ['业务落地与价值', 'L4 自动驾驶巴士', '面向园区、景区、BRT 等固定路线的 L4 级自动驾驶解决方案，已投入多城市运营，用真实视频展示运营成果。', ['路线感知|融合车辆、道路、信号灯和周边交通参与者信息。', '自动决策|支持红绿灯通行、变道、避障、站点停靠等运营动作。', '安全运营|持续沉淀实车视频、接管记录和运行数据。'], ['L4|固定路线自动驾驶', '多场景|园区、景区、BRT', '运营级|真实道路成果展示'], ['红灯停绿灯行|在真实路口完成交通信号响应。', '拨杆变道与失能控制|展示自动驾驶决策与安全冗余能力。'], ['L4 巴士','实车运营','自动驾驶','安全冗余']],
       'gpu-cards': ['GPU 服务器算力', '高性能 GPU 卡', '自建 GPU 服务器集群统一承载模型训练、样本生成、自动标注和多模态检索推理，向客户展示稳定、可调度、可扩展的算力底座。', ['资源纳管|统一管理 GPU 卡、显存、温度、功耗和节点健康状态。', '任务调度|按训练、生成、标注和检索任务动态分配算力。', '状态监控|实时展示利用率、队列、故障与吞吐，支撑研发资源决策。'], ['128+|高性能 GPU 卡', '76%|集群综合利用率', '24h|全天候训练调度'], ['模型训练|支撑交通场景基础模型预训练与微调。', '样本生成与标注|承载样本补齐、自动标注和批量推理。'], ['GPU 集群','训练调度','显存监控','算力底座']],
-      'vehicle-ai-algorithm': ['算法能力', '车端算法库 72+', '覆盖车内安全、车外感知与交通事件识别的车端算法能力，可按车型、终端算力和业务场景组合交付。', ['算法选型|根据 DMS、ADAS、BSD 等业务需求选择算法组合。', '端侧适配|面向摄像头位置、芯片算力、帧率和功耗约束进行模型压缩与部署。', '场景验证|在真实道路、座舱和运营场景中完成效果评估与版本迭代。'], ['72+|车端算法能力', '多场景|车内、车外、交通事件', '端侧|低功耗实时推理'], ['驾驶安全|疲劳、分心、抽烟、打电话等驾驶员状态识别。', '道路感知|前向碰撞、盲区目标、车道与行人车辆检测。'], ['DMS','ADAS','BSD','目标检测','行为分析']],
+      'vehicle-ai-algorithm': ['算法能力', '车端算法库 72+', '覆盖车内安全、车外感知与交通事件识别的车端算法能力，可按车型、终端算力和业务场景组合交付。', ['算法选型|根据 DMS、ADAS、BSW 等业务需求选择算法组合。', '端侧适配|面向摄像头位置、芯片算力、帧率和功耗约束进行模型压缩与部署。', '场景验证|在真实道路、座舱和运营场景中完成效果评估与版本迭代。'], ['72+|车端算法能力', '多场景|车内、车外、交通事件', '端侧|低功耗实时推理'], ['驾驶安全|疲劳、分心、抽烟、打电话等驾驶员状态识别。', '道路感知|前向碰撞、盲区目标、车道与行人车辆检测。'], ['内部算法功能','外部算法功能','端侧 AI','行为分析']],
       'safegpt': ['算法理念', 'safeGPT 人因大脑', '以“理解人、关注人、保护人”为核心，把驾驶员状态、道路环境和车辆行为统一到安全认知引擎中。', ['多源感知|融合人脸、姿态、视线、行为、道路与车辆状态等多维信号。', '风险理解|结合研发工具链理解风险上下文，区分偶发动作、持续风险和紧急事件。', '主动干预|输出预警、提醒、联动制动或运营策略建议，形成安全回路。'], ['人因|驾驶员状态理解', '融合|车内外多维信号', '回路|识别、预警、干预'], ['主动安全预警|识别疲劳、分心、遮挡等风险并触发提醒。', '舱驾联动|将座舱监测结果与 AEB、ADAS 等能力协同。'], ['人因安全','模型认知','风险预警','舱驾融合']],
       'data-processing': ['研发交付流程', '数据处理', '将原始路采、运营回流与合作样本转化为可训练、可评测、可追溯的数据资产。', ['数据接入|统一接入视频、CAN、雷达、IMU 与业务元数据，建立样本索引。', '场景筛选|按天气、道路、行为、风险等级筛出高价值片段。', '质量治理|完成清洗、去重、标注校验与版本沉淀。'], ['千万级|设备数据接入', '分钟级|片段检索与分发', '回路|采集到训练全链路'], ['长尾样本挖掘|识别夜间、雨雾、遮挡等稀缺场景。', '训练集构建|面向不同算法任务生成可复用数据包。'], ['数据清洗','场景库','自动标注','版本治理']],
       'model-training': ['研发交付流程', '模型训练', '面向感知、安全与多模态任务，提供从预训练到微调的弹性训练能力。', ['任务配置|定义数据集、模型结构、损失函数与评测口径。', '训练调度|按资源情况进行单卡、多卡和集群任务调度。', '模型归档|沉淀权重、日志、指标与可复现实验记录。'], ['千卡级|弹性训练资源','多模态|视频、图像、文本融合','可追溯|实验版本管理'], ['算法迭代|支撑 DMS、ADAS、BSD 等模型快速迭代。','垂直模型训练|面向交通场景训练专用基础模型。'], ['预训练','微调','实验管理','模型版本']],
@@ -325,6 +362,29 @@
     document.getElementById('summary').textContent = topic[2];
     render('flow', topic[3], 'flow-item'); render('metrics', topic[4], 'metric-item'); render('scenarios', topic[5], 'scenario-item');
     document.getElementById('tags').innerHTML = topic[6].map(tag => `<span class="tag">${tag}</span>`).join('');
+    if (topicId === 'vehicle-ai-algorithm' && window.AlgorithmLibrary) {
+      const catalog = document.getElementById('algorithmCatalog');
+      const library = window.AlgorithmLibrary;
+      document.getElementById('algorithmCatalogKicker').textContent = LANG === 'en' ? 'Algorithm Catalog' : '算法目录';
+      document.getElementById('algorithmCatalogTitle').textContent = LANG === 'en' ? 'On-vehicle Algorithm Functions' : '车端算法功能';
+      document.getElementById('catalogMoreTitle').textContent = LANG === 'en' ? 'More Algorithm Functions Available' : '更多算法功能';
+      document.getElementById('catalogMoreBadge').textContent = LANG === 'en' ? '72+ capabilities' : '72+ 项能力';
+      document.getElementById('algorithmGroups').innerHTML = library.groups.map(group => {
+        const items = Object.values(library.algorithms).filter(item => item.group === group.id);
+        const groupName = LANG === 'en' ? group.en : group.zh;
+        const groupDescription = LANG === 'en' ? group.descriptionEn : group.descriptionZh;
+        const countLabel = LANG === 'en' ? `${items.length} functions` : `${items.length} 项功能`;
+        const cards = items.map(item => {
+          const name = LANG === 'en' ? item.en : item.zh;
+          const summary = LANG === 'en' ? item.summaryEn : item.summaryZh;
+          const linkLabel = LANG === 'en' ? 'View function →' : '查看功能 →';
+          const href = `algorithm.html?id=${encodeURIComponent(item.id)}&lang=${LANG}`;
+          return `<a class="algorithm-card" href="${href}" aria-label="${name}"><span class="algorithm-card-icon">${library.iconSvg(item.icon)}</span><h4>${name}</h4><p>${summary}</p><span class="algorithm-card-link">${linkLabel}</span></a>`;
+        }).join('');
+        return `<section class="algorithm-group"><div class="algorithm-group-head"><div><h3>${groupName}</h3><p>${groupDescription}</p></div><span class="algorithm-count">${countLabel}</span></div><div class="algorithm-card-grid">${cards}</div></section>`;
+      }).join('');
+      catalog.classList.add('active');
+    }
     if (topicId === 'l2-product') {
       const compliancePanel = document.getElementById('compliancePanel');
       const complianceStandards = ['R131-02', 'R152-02', 'TFL2.5', 'AIS-162'];

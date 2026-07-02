@@ -37,9 +37,14 @@
     '车端算法库': 'On-vehicle Algorithm Library',
     '72+ 种': '72+ algorithms',
     'DMS 疲劳监测': 'DMS Fatigue Monitoring',
+    'DMS 驾驶员监测': 'DMS',
     'ADAS 安全辅助': 'ADAS Driver Assistance',
+    'ADAS 驾驶辅助': 'ADAS',
     'BSD 盲区检测': 'BSD / Blind Spot Detection',
-    '人脸识别': 'Face Recognition',
+    'BSW 盲区预警': 'BSW',
+    '人脸识别': 'Facial Recognition',
+    'P3 客流统计': 'P3 Passenger Flow',
+    '体积测量': 'Volume Measurement',
     '车牌识别': 'License Plate Recognition',
     '行为分析': 'Behavior Analysis',
     '多目标跟踪': 'Multi-object Tracking',
@@ -92,7 +97,12 @@
     '统一调度 GPU、存储与数据管线，支撑车端模型训练、长尾样本生成、自动标注预处理和研发知识检索。': 'Unified scheduling of GPUs, storage, and data pipelines supports on-vehicle model training, long-tail sample generation, automated annotation preprocessing, and R&D knowledge retrieval.',
     '算力能力标签': 'Compute Capability Tags',
     '面向车内安全、车外感知与交通事件识别，沉淀可组合、可量产的车端能力。': 'Composable, production-ready on-vehicle capabilities for in-cabin safety, external perception, and traffic event recognition.',
-    '覆盖 DMS、ADAS、BSD、行为分析、车牌识别、交通事件检测等 72+ 种算法能力，适配不同终端算力与业务场景。': 'More than 72 algorithms across DMS, ADAS, BSD, behavior analysis, license plate recognition, and traffic event detection, adapted to different terminal computing capabilities and business scenarios.',
+    '覆盖内部与外部两大类算法功能，包括 DMS、人脸识别、P3 客流统计、ADAS、车牌识别与 BSW 等 72+ 种车端算法。': 'More than 72 on-vehicle algorithms across internal and external algorithm functions, including DMS, facial recognition, P3 passenger flow, ADAS, license plate recognition, and BSW.',
+    '座舱智能': 'In-Cabin Intelligence',
+    '道路与车辆感知': 'Road & Vehicle Perception',
+    '内部算法功能': 'Internal Algorithm Functions',
+    '外部算法功能': 'External Algorithm Functions',
+    '7 项重点功能': '7 Featured Functions',
     'safeGPT（人因大脑）': 'safeGPT (Human Factors Intelligence)',
     '面向驾驶安全的风险理解框架，融合驾驶员状态、道路环境、车辆动力学等多维信号，实现主动安全预警与个性化干预。': 'A driving safety risk-understanding framework that combines driver state, road environment, vehicle dynamics, and other multidimensional signals to enable proactive safety warnings and personalized intervention.',
     '理解人': 'Understand People',
@@ -197,6 +207,8 @@
     '查看模型评估详情': 'View Model Evaluation details',
     '查看软件集成详情': 'View Software Integration details',
     '打开自动化测试平台': 'Open Automated Testing platform',
+    '打开自动化测试选项': 'Open Automated Testing options',
+    '关闭自动化测试选项': 'Close Automated Testing options',
     '查看部署上线详情': 'View Deployment details',
     '查看运营反馈详情': 'View Operations Feedback details',
     '查看车端采集数据详情': 'View On-vehicle Data Collection details',
@@ -218,7 +230,7 @@
     'l2-product': ['Business Applications and Value', 'L2 Cabin-driving Integrated AEB', 'A system-level solution that integrates cabin monitoring and driver assistance, linking driver-state perception with emergency braking to significantly reduce accident risk.', ['Risk detection|Combines driver state, forward road conditions, and vehicle motion to identify high-risk scenarios.', 'Cabin-driving coordination|Links DMS with AEB and ADAS to create a proactive safety loop.', 'Production validation|Completes integration, calibration, testing, and delivery for customer vehicle models.'], ['L2|Integrated cabin-driving assistance', 'Milliseconds|Risk detection and coordinated response', 'Production-ready|Integration with real vehicle models'], ['Fatigue response|Detects abnormal driver states and triggers assistance alerts.', 'Forward collision risk|Combines cabin and road signals to reduce rear-end collisions and false activations.'], ['AEB', 'DMS', 'Cabin-driving integration', 'Proactive safety']],
     'l4-product': ['Business Applications and Value', 'L4 Autonomous Bus', 'An L4 autonomous driving solution for fixed routes in campuses, scenic areas, and BRT corridors, deployed in multiple cities and demonstrated through real-world operation videos.', ['Route perception|Combines vehicle, road, traffic-light, and surrounding road-user information.', 'Autonomous decision-making|Supports traffic lights, lane changes, obstacle avoidance, and station stops.', 'Safe operations|Continuously captures vehicle video, takeover records, and operating data.'], ['L4|Fixed-route autonomous driving', 'Multiple scenarios|Campuses, scenic areas, and BRT corridors', 'Operational grade|Real-road results'], ['Traffic-light response|Responds to traffic signals at real intersections.', 'Lever-controlled lane change and driver-incapacitation control|Demonstrates autonomous driving decisions and safety redundancy.'], ['L4 Bus', 'Real-world operations', 'Autonomous driving', 'Safety redundancy']],
     'gpu-cards': ['GPU server computing power', 'Computing Infrastructure for Project delivery', 'Our in-house GPU server cluster supports model training, sample generation, automated annotation, and multimodal retrieval, providing reliable throughput for data processing, training/evaluation, and release delivery.', ['Resource management|Centrally manages GPUs, memory, temperature, power, and node health.', 'Task scheduling|Dynamically allocates compute to training, generation, annotation, and retrieval.', 'Status monitoring|Displays utilization, queues, failures, and throughput in real time to guide R&D resource decisions.'], ['128+|High-performance GPUs', '76%|Overall cluster utilization', '24h|24/7 Training Scheduling'], ['Model Training|Supports pre-training and fine-tuning for transportation large models.', 'Sample Generation and Automated Annotation|Runs sample completion, automated annotation, and batch inference.'], ['GPU cluster', 'Training scheduling', 'Memory monitoring', 'Compute infrastructure']],
-    'vehicle-ai-algorithm': ['Algorithm Capabilities', 'On-vehicle Algorithm Library 72+', 'On-vehicle algorithms spanning in-cabin safety, external perception, and traffic event detection, adapted to different terminal computing capabilities and business scenarios.', ['Algorithm selection|Selects combinations for DMS, ADAS, BSD, and other business needs.', 'Edge adaptation|Compresses and deploys models for camera placement, chip capacity, frame rate, and power constraints.', 'Scenario validation|Evaluates performance and iterates releases on real roads, in cabins, and in operations.'], ['72+|On-vehicle algorithm capabilities', 'Multiple scenarios|Cabin, road, and traffic events', 'On edge|Low-power real-time inference'], ['Driving safety|Detects fatigue, distraction, smoking, phone use, and other driver states.', 'Road perception|Detects forward collisions, blind-spot objects, lanes, pedestrians, and vehicles.'], ['DMS', 'ADAS', 'BSD', 'Object detection', 'Behavior analysis']],
+    'vehicle-ai-algorithm': ['Algorithm Capabilities', 'On-vehicle Algorithm Library 72+', 'On-vehicle algorithms spanning in-cabin safety, external perception, and traffic event detection, adapted to different terminal computing capabilities and business scenarios.', ['Algorithm selection|Selects combinations for DMS, ADAS, BSW, and other business needs.', 'Edge adaptation|Compresses and deploys models for camera placement, chip capacity, frame rate, and power constraints.', 'Scenario validation|Evaluates performance and iterates releases on real roads, in cabins, and in operations.'], ['72+|On-vehicle algorithm capabilities', 'Multiple scenarios|Cabin, road, and traffic events', 'On edge|Low-power real-time inference'], ['Driving safety|Detects fatigue, distraction, smoking, phone use, and other driver states.', 'Road perception|Detects forward collisions, blind-spot objects, lanes, pedestrians, and vehicles.'], ['Internal Algorithm Functions', 'External Algorithm Functions', 'Edge AI', 'Behavior analysis']],
     'safegpt': ['Algorithm Philosophy', 'safeGPT Human Factors Intelligence', 'Centered on understanding people, caring about people, and protecting people, safeGPT unifies driver state, road context, and vehicle behavior in a safety cognition engine.', ['Multisource perception|Combines face, posture, gaze, behavior, road, and vehicle-state signals.', 'Risk understanding|Uses the R&D toolchain to distinguish momentary actions, sustained risks, and emergencies.', 'Proactive intervention|Produces warnings, reminders, braking coordination, or operating recommendations to close the safety loop.'], ['Human factors|Understanding driver state', 'Fusion|Multidimensional cabin and road signals', 'Closed loop|Detection, warning, and intervention'], ['Proactive safety alerts|Detects fatigue, distraction, occlusion, and other risks.', 'Cabin-driving coordination|Coordinates cabin monitoring with AEB and ADAS.'], ['Human factors safety', 'Model cognition', 'Risk warning', 'Cabin-driving integration']],
     'data-processing': ['R&D Delivery Workflow', 'Data Processing', 'Transforms raw road data, operations feedback, and partner samples into trainable, measurable, and traceable data assets.', ['Data ingestion|Unifies video, CAN, radar, IMU, and business metadata with sample indexing.', 'Scenario filtering|Selects high-value clips by weather, road, behavior, and risk level.', 'Quality governance|Cleans, deduplicates, validates annotations, and versions data.'], ['Tens of millions|Device data ingestion', 'Minutes|Clip retrieval and distribution', 'Closed loop|Collection through training'], ['Long-tail mining|Finds scarce nighttime, rain, fog, and occlusion scenarios.', 'Training-set creation|Builds reusable data packages for different algorithm tasks.'], ['Data cleaning', 'Scenario library', 'Automated annotation', 'Version governance']],
     'model-training': ['R&D Delivery Workflow', 'Model Training', 'Provides elastic training from pre-training through fine-tuning for perception, safety, and multimodal tasks.', ['Task configuration|Defines datasets, model structures, loss functions, and evaluation criteria.', 'Training scheduling|Schedules single-card, multi-card, and cluster jobs based on available resources.', 'Model archiving|Stores weights, logs, metrics, and reproducible experiment records.'], ['Large-scale|Elastic training resources', 'Multimodal|Video, image, and text fusion', 'Traceable|Experiment version management'], ['Algorithm iteration|Accelerates DMS, ADAS, BSD, and other model iterations.', 'Vertical model training|Trains specialized foundation models for transportation scenarios.'], ['Pre-training', 'Fine-tuning', 'Experiment management', 'Model versions']],
@@ -274,7 +286,7 @@
   function localizeInternalLinks(language) {
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (!href || (!href.startsWith('dididi.html') && !href.startsWith('detail.html'))) return;
+      if (!href || (!href.startsWith('dididi.html') && !href.startsWith('detail.html') && !href.startsWith('algorithm.html'))) return;
       const url = new URL(href, location.href);
       url.searchParams.set('lang', language);
       link.setAttribute('href', url.pathname.split('/').pop() + url.search + url.hash);
@@ -363,7 +375,8 @@
   function initialize() {
     const language = getLanguage();
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
-    document.body.classList.add(location.pathname.toLowerCase().endsWith('detail.html') ? 'detail-page' : 'overview-page');
+    const currentPage = location.pathname.toLowerCase();
+    document.body.classList.add(currentPage.endsWith('detail.html') || currentPage.endsWith('algorithm.html') ? 'detail-page' : 'overview-page');
     installStyles();
     if (language === 'en') {
       translateTextNodes(document.body);

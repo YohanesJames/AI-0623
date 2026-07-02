@@ -24,6 +24,8 @@ Then open `http://localhost:8000/`.
 - Main page layout and Chinese copy: `dididi.html`
 - Detail pages and Chinese detail copy: `detail.html`
 - English translations: `i18n.js`
+- Algorithm catalog data and icons: `algorithm-data.js`
+- Reusable algorithm function page: `algorithm.html`
 - Images: `assets/`
 - Web videos: `mp4/l2/converted/` and `mp4/l4/web/`
 
