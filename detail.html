@@ -474,9 +474,25 @@
       let videos = [];
       let activeIndex = 0;
       let previousFocus = null;
+      let pausedBackgroundVideos = [];
 
       const videoName = video => LANG === 'en' ? video.en : video.zh;
       const countLabel = total => LANG === 'en' ? `${total} ${total === 1 ? 'video' : 'videos'}` : `${total} 个视频`;
+
+      function pauseBackgroundVideos() {
+        pausedBackgroundVideos = Array.from(document.querySelectorAll('video')).filter(video => (
+          video !== player && !video.paused && !video.ended
+        ));
+        pausedBackgroundVideos.forEach(video => video.pause());
+      }
+
+      function resumeBackgroundVideos() {
+        const videosToResume = pausedBackgroundVideos;
+        pausedBackgroundVideos = [];
+        videosToResume.forEach(video => {
+          if (video.isConnected) video.play().catch(() => {});
+        });
+      }
 
       function selectVideo(index, shouldPlay) {
         if (!videos[index]) return;
@@ -515,6 +531,7 @@
       function openGallery(standard, opener) {
         previousFocus = opener;
         videos = Array.from(library[standard] || []);
+        pauseBackgroundVideos();
         title.textContent = standard;
         kicker.textContent = LANG === 'en' ? 'Regulation Test Videos' : '法规测试视频';
         description.textContent = LANG === 'en' ? 'Select a test demonstration video to play.' : '选择测试演示视频进行播放。';
@@ -544,6 +561,7 @@
         player.load();
         modal.hidden = true;
         document.body.classList.remove('regulation-modal-open');
+        resumeBackgroundVideos();
         if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
       }
 
