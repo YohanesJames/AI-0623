@@ -213,14 +213,51 @@
     .flow-item span, .metric-item span, .scenario-item span { display: block; color: hsl(var(--muted-foreground)); font-size: 0.88rem; line-height: 1.66; }
     .primary-column, .aside { display: grid; gap: 18px; align-content: start; }
     .compliance-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .compliance-item { display: grid; min-height: 72px; place-items: center; padding: 16px; border: 1px solid hsl(var(--border) / 0.7); border-radius: 10px; background: hsl(var(--secondary) / 0.55); text-align: center; }
+    .compliance-item { display: grid; min-height: 72px; place-items: center; padding: 16px; border: 1px solid hsl(var(--border) / 0.7); border-radius: 10px; background: hsl(var(--secondary) / 0.55); color: hsl(var(--foreground)); text-align: center; font: inherit; }
     .compliance-item strong { font-size: 1rem; font-weight: 760; letter-spacing: 0.02em; }
+    button.compliance-item { width: 100%; grid-template-columns: minmax(0, 1fr) auto; place-items: center stretch; gap: 12px; text-align: left; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; }
+    button.compliance-item:hover, button.compliance-item:focus-visible { transform: translateY(-3px); border-color: hsl(var(--ring) / 0.68); background: hsl(var(--secondary) / 0.78); outline: none; }
+    .compliance-item-copy { display: grid; gap: 3px; }
+    .compliance-item-copy small { color: hsl(var(--muted-foreground)); font-size: 0.7rem; }
+    .compliance-item-action { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 9px; background: hsl(var(--background) / 0.58); color: hsl(var(--ring)); }
+    .compliance-item-action svg { width: 16px; height: 16px; }
+    .regulation-modal { position: fixed; inset: 0; z-index: 700; display: grid; place-items: center; padding: 24px; }
+    .regulation-modal[hidden], .regulation-gallery[hidden], .regulation-video-empty[hidden] { display: none; }
+    .regulation-modal-backdrop { position: absolute; inset: 0; background: rgba(0, 4, 2, 0.42); backdrop-filter: blur(9px) brightness(0.68); -webkit-backdrop-filter: blur(9px) brightness(0.68); animation: regulationBackdropIn 0.22s ease-out both; }
+    .regulation-dialog { position: relative; isolation: isolate; width: min(1120px, 92vw); max-height: calc(100vh - 48px); overflow-y: auto; padding: clamp(22px, 3.2vw, 36px); border: 1px solid hsl(var(--border) / 0.92); border-radius: 20px; background: radial-gradient(circle at 18% 0%, rgba(178, 224, 0, 0.08), transparent 24rem), linear-gradient(180deg, rgba(6, 14, 10, 0.985), rgba(1, 5, 3, 0.985)); box-shadow: 0 38px 120px rgba(0, 0, 0, 0.72), 0 0 46px rgba(178, 224, 0, 0.07); outline: none; animation: regulationDialogIn 0.3s cubic-bezier(0.2, 0.82, 0.26, 1) both; }
+    .regulation-dialog::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle, rgba(185, 235, 0, 0.7) 0 1px, transparent 1.8px) 7% 8% / 170px 130px, radial-gradient(circle, rgba(255, 255, 230, 0.64) 0 0.9px, transparent 1.6px) 11% 19% / 260px 210px, radial-gradient(circle, rgba(166, 218, 0, 0.48) 0 1.3px, transparent 2.2px) 43% 17% / 310px 240px; opacity: 0.42; }
+    .regulation-dialog > * { position: relative; z-index: 1; }
+    .regulation-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+    .regulation-dialog-kicker { display: block; margin-bottom: 7px; color: hsl(var(--ring)); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    .regulation-dialog h2 { margin-bottom: 7px; font-size: clamp(1.7rem, 4vw, 2.55rem); line-height: 1; letter-spacing: -0.04em; }
+    .regulation-dialog-head p { color: hsl(var(--muted-foreground)); font-size: 0.86rem; }
+    .regulation-close { display: grid; flex: 0 0 auto; width: 40px; height: 40px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 10px; background: hsl(var(--secondary) / 0.72); color: hsl(var(--foreground)); cursor: pointer; }
+    .regulation-close:hover, .regulation-close:focus-visible { border-color: hsl(var(--ring) / 0.65); outline: none; }
+    .regulation-close svg { width: 18px; height: 18px; }
+    .regulation-gallery { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(270px, 0.72fr); gap: 18px; align-items: start; }
+    .regulation-player-shell { overflow: hidden; border: 1px solid hsl(var(--border) / 0.82); border-radius: 14px; background: #000; }
+    .regulation-player { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: contain; }
+    .regulation-player-caption { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; background: hsl(var(--secondary) / 0.62); }
+    .regulation-player-caption strong { font-size: 0.88rem; }
+    .regulation-player-caption span { flex: 0 0 auto; color: hsl(var(--muted-foreground)); font-size: 0.7rem; }
+    .regulation-playlist { padding: 14px; border: 1px solid hsl(var(--border) / 0.75); border-radius: 14px; background: hsl(var(--secondary) / 0.44); }
+    .regulation-playlist-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 11px; color: hsl(var(--muted-foreground)); font-size: 0.72rem; }
+    .regulation-video-list { display: grid; gap: 8px; max-height: 440px; overflow-y: auto; padding-right: 3px; }
+    .regulation-video-option { display: grid; width: 100%; grid-template-columns: 34px minmax(0, 1fr); gap: 11px; align-items: center; padding: 10px; border: 1px solid transparent; border-radius: 10px; background: hsl(var(--background) / 0.38); color: hsl(var(--foreground)); text-align: left; font: inherit; cursor: pointer; transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease; }
+    .regulation-video-option:hover, .regulation-video-option:focus-visible { transform: translateX(2px); border-color: hsl(var(--border)); background: hsl(var(--secondary) / 0.75); outline: none; }
+    .regulation-video-option.active { border-color: hsl(var(--ring) / 0.6); background: hsl(var(--ring) / 0.1); }
+    .regulation-video-index { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 8px; background: hsl(var(--background) / 0.72); color: hsl(var(--ring)); font-size: 0.68rem; font-weight: 700; }
+    .regulation-video-option strong { overflow: hidden; font-size: 0.76rem; line-height: 1.4; text-overflow: ellipsis; }
+    .regulation-video-empty { display: grid; min-height: 280px; place-items: center; padding: 32px; border: 1px solid hsl(var(--border) / 0.75); border-radius: 14px; background: hsl(var(--secondary) / 0.45); color: hsl(var(--muted-foreground)); text-align: center; }
+    body.regulation-modal-open { overflow: hidden; }
+    @keyframes regulationBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes regulationDialogIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .tag { padding: 7px 11px; border-radius: 999px; border: 1px solid hsl(var(--border)); background: hsl(var(--secondary) / 0.7); color: hsl(var(--muted-foreground)); font-size: 0.78rem; letter-spacing: 0.02em; }
     .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 12px 16px; border-radius: 10px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-weight: 700; font-size: 0.9rem; }
     @media (max-width: 1380px) { .detail-nav-links { display: none; } .nav { grid-template-columns: 1fr auto; gap: 16px; } }
     @media (max-width: 900px) { .nav { padding-right: 24px; } }
-    @media (max-width: 860px) { .shell { width: min(100% - 28px, 680px); } .nav { padding: 14px 24px; } .brand-logo { width: 132px; } .hero { padding: 58px 0 34px; } .live-grid, .gpu-dashboard, .video-grid { grid-template-columns: 1fr; } .video-stage-head { align-items: flex-start; flex-direction: column; } .live-map, .gpu-core { min-height: 360px; } .gpu-stats { grid-template-columns: 1fr; } .algorithm-catalog { padding: 22px; } .catalog-more { grid-template-columns: auto 1fr; } .catalog-more-badge { grid-column: 2; justify-self: start; } .content { grid-template-columns: 1fr; padding-bottom: 60px; } .panel { padding: 22px; } }
+    @media (max-width: 860px) { .shell { width: min(100% - 28px, 680px); } .nav { padding: 14px 24px; } .brand-logo { width: 132px; } .hero { padding: 58px 0 34px; } .live-grid, .gpu-dashboard, .video-grid { grid-template-columns: 1fr; } .video-stage-head { align-items: flex-start; flex-direction: column; } .live-map, .gpu-core { min-height: 360px; } .gpu-stats { grid-template-columns: 1fr; } .algorithm-catalog { padding: 22px; } .catalog-more { grid-template-columns: auto 1fr; } .catalog-more-badge { grid-column: 2; justify-self: start; } .regulation-modal { padding: 14px; } .regulation-dialog { width: 100%; max-height: calc(100vh - 28px); padding: 20px; } .regulation-gallery { grid-template-columns: 1fr; } .regulation-video-list { max-height: 250px; } .content { grid-template-columns: 1fr; padding-bottom: 60px; } .panel { padding: 22px; } }
     @media (max-width: 480px) { .nav { padding-right: 18px; } .brand-logo { width: 112px; } .back-link { font-size: 0; } .back-link::before { content: "←"; font-size: 1.1rem; } h1 { font-size: clamp(2.7rem, 14vw, 4rem); } .catalog-head h2 { font-size: clamp(1rem, 5.2vw, 1.35rem); letter-spacing: -0.025em; } .catalog-more { grid-template-columns: 1fr; } .catalog-more-badge { grid-column: 1; } }
   </style>
   <link rel="stylesheet" href="detail-background.css?v=20260702-3">
@@ -325,8 +362,38 @@
       </aside>
     </main>
   </div>
-  <script src="i18n.js?v=20260702-3"></script>
-  <script src="algorithm-data.js?v=20260702-2"></script>
+  <div class="regulation-modal" id="regulationVideoModal" hidden>
+    <div class="regulation-modal-backdrop" data-regulation-close></div>
+    <section class="regulation-dialog" role="dialog" aria-modal="true" aria-labelledby="regulationVideoTitle" tabindex="-1">
+      <header class="regulation-dialog-head">
+        <div>
+          <span class="regulation-dialog-kicker" id="regulationVideoKicker">法规测试视频</span>
+          <h2 id="regulationVideoTitle">R131-02</h2>
+          <p id="regulationVideoDescription">选择测试演示视频进行播放。</p>
+        </div>
+        <button class="regulation-close" type="button" data-regulation-close aria-label="关闭法规测试视频">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+      <div class="regulation-gallery" id="regulationVideoGallery">
+        <div class="regulation-player-shell">
+          <video class="regulation-player" id="regulationVideoPlayer" controls playsinline preload="metadata"></video>
+          <div class="regulation-player-caption">
+            <strong id="regulationCurrentVideoTitle">测试视频</strong>
+            <span id="regulationCurrentVideoIndex">01 / 06</span>
+          </div>
+        </div>
+        <aside class="regulation-playlist" aria-label="法规测试视频列表">
+          <div class="regulation-playlist-head"><span id="regulationPlaylistLabel">视频列表</span><span id="regulationVideoCount">6 个视频</span></div>
+          <div class="regulation-video-list" id="regulationVideoList"></div>
+        </aside>
+      </div>
+      <div class="regulation-video-empty" id="regulationVideoEmpty" hidden></div>
+    </section>
+  </div>
+  <script src="i18n.js?v=20260703-1"></script>
+  <script src="algorithm-data.js?v=20260703-9"></script>
+  <script src="compliance-videos.js?v=20260703-2"></script>
   <script>
     const LANG = window.StreamaxI18n.getLanguage();
     const BASE_ZH = {
@@ -385,12 +452,124 @@
       }).join('');
       catalog.classList.add('active');
     }
+
+    function initRegulationVideoGallery() {
+      const library = window.ComplianceVideoLibrary || {};
+      const modal = document.getElementById('regulationVideoModal');
+      const dialog = modal.querySelector('.regulation-dialog');
+      const player = document.getElementById('regulationVideoPlayer');
+      const playerShell = modal.querySelector('.regulation-player-shell');
+      const list = document.getElementById('regulationVideoList');
+      const gallery = document.getElementById('regulationVideoGallery');
+      const empty = document.getElementById('regulationVideoEmpty');
+      const playlist = modal.querySelector('.regulation-playlist');
+      const title = document.getElementById('regulationVideoTitle');
+      const kicker = document.getElementById('regulationVideoKicker');
+      const description = document.getElementById('regulationVideoDescription');
+      const currentTitle = document.getElementById('regulationCurrentVideoTitle');
+      const currentIndex = document.getElementById('regulationCurrentVideoIndex');
+      const playlistLabel = document.getElementById('regulationPlaylistLabel');
+      const count = document.getElementById('regulationVideoCount');
+      const closeButton = modal.querySelector('.regulation-close');
+      let videos = [];
+      let activeIndex = 0;
+      let previousFocus = null;
+
+      const videoName = video => LANG === 'en' ? video.en : video.zh;
+      const countLabel = total => LANG === 'en' ? `${total} ${total === 1 ? 'video' : 'videos'}` : `${total} 个视频`;
+
+      function selectVideo(index, shouldPlay) {
+        if (!videos[index]) return;
+        activeIndex = index;
+        player.pause();
+        player.src = videos[index].src;
+        player.load();
+        currentTitle.textContent = videoName(videos[index]);
+        currentIndex.textContent = `${String(index + 1).padStart(2, '0')} / ${String(videos.length).padStart(2, '0')}`;
+        list.querySelectorAll('.regulation-video-option').forEach((button, buttonIndex) => {
+          const isActive = buttonIndex === index;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+        if (shouldPlay) player.play().catch(() => {});
+      }
+
+      function renderPlaylist() {
+        list.replaceChildren();
+        videos.forEach((video, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'regulation-video-option';
+          button.setAttribute('aria-label', `${LANG === 'en' ? 'Play' : '播放'} ${videoName(video)}`);
+          const number = document.createElement('span');
+          number.className = 'regulation-video-index';
+          number.textContent = String(index + 1).padStart(2, '0');
+          const label = document.createElement('strong');
+          label.textContent = videoName(video);
+          button.append(number, label);
+          button.addEventListener('click', () => selectVideo(index, true));
+          list.appendChild(button);
+        });
+      }
+
+      function openGallery(standard, opener) {
+        previousFocus = opener;
+        videos = Array.from(library[standard] || []);
+        title.textContent = standard;
+        kicker.textContent = LANG === 'en' ? 'Regulation Test Videos' : '法规测试视频';
+        description.textContent = LANG === 'en' ? 'Select a test demonstration video to play.' : '选择测试演示视频进行播放。';
+        playlistLabel.textContent = LANG === 'en' ? 'Video playlist' : '视频列表';
+        playlist.setAttribute('aria-label', LANG === 'en' ? 'Regulation test video playlist' : '法规测试视频列表');
+        count.textContent = countLabel(videos.length);
+        closeButton.setAttribute('aria-label', LANG === 'en' ? 'Close regulation test videos' : '关闭法规测试视频');
+        modal.hidden = false;
+        document.body.classList.add('regulation-modal-open');
+        if (videos.length) {
+          gallery.hidden = false;
+          empty.hidden = true;
+          playerShell.hidden = false;
+          renderPlaylist();
+          selectVideo(0, false);
+        } else {
+          gallery.hidden = true;
+          empty.hidden = false;
+          empty.textContent = LANG === 'en' ? `No videos have been added for ${standard} yet.` : `${standard} 尚未添加视频。`;
+        }
+        dialog.focus();
+      }
+
+      function closeGallery() {
+        player.pause();
+        player.removeAttribute('src');
+        player.load();
+        modal.hidden = true;
+        document.body.classList.remove('regulation-modal-open');
+        if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+      }
+
+      document.querySelectorAll('[data-regulation-video]').forEach(button => {
+        button.addEventListener('click', () => openGallery(button.dataset.regulationVideo, button));
+      });
+      modal.querySelectorAll('[data-regulation-close]').forEach(control => control.addEventListener('click', closeGallery));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !modal.hidden) closeGallery();
+      });
+    }
+
     if (topicId === 'l2-product') {
       const compliancePanel = document.getElementById('compliancePanel');
       const complianceStandards = ['R131-02', 'R152-02', 'TFL2.5', 'AIS-162'];
+      const complianceLibrary = window.ComplianceVideoLibrary || {};
       document.getElementById('complianceTitle').textContent = LANG === 'en' ? 'Regulation Compliance' : '法规合规';
-      document.getElementById('complianceList').innerHTML = complianceStandards.map(standard => `<div class="compliance-item"><strong>${standard}</strong></div>`).join('');
+      document.getElementById('complianceList').innerHTML = complianceStandards.map(standard => {
+        if (!Object.prototype.hasOwnProperty.call(complianceLibrary, standard)) return `<div class="compliance-item"><strong>${standard}</strong></div>`;
+        const total = complianceLibrary[standard].length;
+        const videoLabel = LANG === 'en' ? `${total} ${total === 1 ? 'video' : 'videos'}` : `${total} 个视频`;
+        const ariaLabel = LANG === 'en' ? `Open ${standard} test videos` : `打开 ${standard} 测试视频`;
+        return `<button class="compliance-item" type="button" data-regulation-video="${standard}" aria-label="${ariaLabel}"><span class="compliance-item-copy"><strong>${standard}</strong><small>${videoLabel}</small></span><span class="compliance-item-action" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg></span></button>`;
+      }).join('');
       compliancePanel.hidden = false;
+      initRegulationVideoGallery();
     }
     if (topicId === 'vehicle-data') {
       const live = document.getElementById('vehicleLive');
