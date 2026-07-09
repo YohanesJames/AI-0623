@@ -14,6 +14,18 @@ mp4/l2/*.avi
 mp4/l2/*.mp4
 mp4/l4/*.mp4
 mp4/Volume Measurement/*.mp4
+mp4/Facial Recognition/*.mp4
+mp4/licenseplate/*.avi
+mp4/TFL2.5/*.mp4
+mp4/TFL2.5/*.MP4
+mp4/safegpt/*.mp4
+mp4/other/*.mp4
+mp4/APC/*.mp4
+mp4/GB-39901/*.mp4
+mp4/JT-T1242/*.mp4
+mp4/DMS/*/*.mp4
+mp4/DMS/*/*.264
+!mp4/DMS/web/*.mp4
 
 # Operating-system files
 Thumbs.db

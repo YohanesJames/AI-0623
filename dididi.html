@@ -1145,6 +1145,16 @@
     .testing-video-back:hover, .testing-video-back:focus-visible { color: hsl(var(--foreground)); }
     .testing-video-frame { overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: 16px; background: #000; }
     .testing-video-frame video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+    .custom-video-player { position: relative; isolation: isolate; overflow: hidden; background: #000; }
+    .custom-video-player video { position: relative; z-index: 1; }
+    .custom-video-controls { position: relative; z-index: 5; display: grid; grid-template-columns: auto minmax(110px, 1fr) auto auto auto; gap: 12px; align-items: center; min-height: 52px; padding: 10px 12px; border-top: 1px solid hsl(var(--border) / 0.68); background: hsl(var(--background) / 0.96); pointer-events: auto; }
+    .custom-video-control { display: grid; width: 34px; height: 32px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 8px; background: hsl(var(--secondary) / 0.72); color: hsl(var(--foreground)); cursor: pointer; }
+    .custom-video-control:hover, .custom-video-control:focus-visible { border-color: hsl(var(--ring) / 0.72); color: hsl(var(--ring)); outline: none; }
+    .custom-video-control svg { width: 16px; height: 16px; fill: currentColor; }
+    .custom-video-seek { width: 100%; min-width: 0; accent-color: hsl(var(--ring)); cursor: pointer; }
+    .custom-video-time { color: hsl(var(--muted-foreground)); font-size: 0.7rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .custom-video-player:fullscreen { display: grid; height: 100vh; grid-template-rows: minmax(0, 1fr) auto; background: #000; }
+    .custom-video-player:fullscreen video { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
     .testing-video-missing { display: grid; min-height: 280px; place-items: center; padding: 32px; background: hsl(var(--secondary) / 0.55); color: hsl(var(--muted-foreground)); text-align: center; }
     .testing-video-missing strong { display: block; margin-bottom: 8px; color: hsl(var(--foreground)); }
     body.testing-modal-open { overflow: hidden; }
@@ -1154,6 +1164,8 @@
       .testing-option-grid { grid-template-columns: 1fr; }
       .testing-option { min-height: 176px; }
       .testing-option-icon { margin-bottom: 18px; }
+      .custom-video-controls { grid-template-columns: auto minmax(70px, 1fr) auto auto; gap: 8px; }
+      .custom-video-time { display: none; }
     }
 
     /* 鈹€鈹€ FOOTER 鈹€鈹€ */
@@ -1451,7 +1463,7 @@
               <div class="tag-wrap">
                 <span class="tag">内部算法功能</span>
                 <span class="tag">外部算法功能</span>
-                <span class="tag">7 项重点功能</span>
+                <span class="tag">72+ 算法功能</span>
               </div>
             </a>
             <a class="mod1-panel fade-up" href="detail.html?topic=safegpt" aria-label="查看 safeGPT 人因大脑详情">
@@ -1701,9 +1713,18 @@
       <div class="testing-video-stage" id="niSimulationStage" hidden>
         <button class="testing-video-back" type="button" id="testingVideoBack" data-en-label="← Back to options">← 返回选项</button>
         <div class="testing-video-frame">
-          <video id="niSimulationVideo" controls playsinline preload="metadata">
-            <source src="mp4/ni/ni-simulation.mp4" type="video/mp4">
-          </video>
+          <div class="custom-video-player" data-custom-video-player>
+            <video id="niSimulationVideo" muted playsinline preload="metadata">
+              <source src="mp4/ni/ni-simulation.mp4" type="video/mp4">
+            </video>
+            <div class="custom-video-controls">
+              <button class="custom-video-control" type="button" data-video-toggle aria-label="Play or pause video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-pause-icon d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button>
+              <input class="custom-video-seek" type="range" min="0" max="0" step="0.05" value="0" data-video-seek aria-label="Seek video">
+              <span class="custom-video-time" data-video-time>0:00 / 0:00</span>
+              <button class="custom-video-control" type="button" data-video-mute aria-label="Unmute video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-volume-icon d="M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z"/></svg></button>
+              <button class="custom-video-control" type="button" data-video-fullscreen aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button>
+            </div>
+          </div>
           <div class="testing-video-missing" id="niSimulationMissing" hidden>
             <div><strong data-en-label="NI simulation video not added yet">尚未添加 NI 仿真视频</strong><span data-en-label="Add the MP4 file at mp4/ni/ni-simulation.mp4.">请将 MP4 文件添加到 mp4/ni/ni-simulation.mp4。</span></div>
           </div>
@@ -1725,9 +1746,67 @@
       const openVideo = document.getElementById('openNiSimulation');
       const backButton = document.getElementById('testingVideoBack');
       const video = document.getElementById('niSimulationVideo');
+      const videoPlayer = video && video.closest('[data-custom-video-player]');
       const missing = document.getElementById('niSimulationMissing');
       let previousFocus = null;
       if (!modal || !dialog || !launchers.length) return;
+
+      function initCustomVideoPlayers(root) {
+        root.querySelectorAll('[data-custom-video-player]').forEach(player => {
+          if (player.dataset.customVideoReady === 'true') return;
+          player.dataset.customVideoReady = 'true';
+          const video = player.querySelector('video');
+          const toggle = player.querySelector('[data-video-toggle]');
+          const seek = player.querySelector('[data-video-seek]');
+          const time = player.querySelector('[data-video-time]');
+          const mute = player.querySelector('[data-video-mute]');
+          const fullscreen = player.querySelector('[data-video-fullscreen]');
+          const icon = toggle.querySelector('path');
+          const volumeIcon = mute.querySelector('path');
+          const formatTime = seconds => {
+            if (!Number.isFinite(seconds)) return '0:00';
+            const minutes = Math.floor(seconds / 60);
+            const remaining = Math.floor(seconds % 60);
+            return `${minutes}:${String(remaining).padStart(2, '0')}`;
+          };
+          const updateTimeline = () => {
+            const duration = Number.isFinite(video.duration) ? video.duration : 0;
+            seek.max = duration;
+            seek.value = Math.min(video.currentTime || 0, duration);
+            time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
+          };
+          const updatePlayState = () => {
+            icon.setAttribute('d', video.paused ? 'M8 5v14l11-7z' : 'M7 5h4v14H7zm6 0h4v14h-4z');
+            toggle.setAttribute('aria-label', video.paused ? window.StreamaxI18n.text('播放视频', 'Play video') : window.StreamaxI18n.text('暂停视频', 'Pause video'));
+          };
+          const updateMuteState = () => {
+            volumeIcon.setAttribute('d', video.muted || video.volume === 0 ? 'M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z' : 'M4 9v6h4l5 4V5L8 9H4zm11.5-.5a5 5 0 0 1 0 7l-1.4-1.4a3 3 0 0 0 0-4.2l1.4-1.4zm2.8-2.8a9 9 0 0 1 0 12.6l-1.4-1.4a7 7 0 0 0 0-9.8l1.4-1.4z');
+            mute.setAttribute('aria-label', video.muted || video.volume === 0 ? window.StreamaxI18n.text('打开视频声音', 'Unmute video') : window.StreamaxI18n.text('关闭视频声音', 'Mute video'));
+          };
+          toggle.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+          video.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+          seek.addEventListener('input', () => { video.currentTime = Number(seek.value); updateTimeline(); });
+          mute.addEventListener('click', () => { video.muted = !video.muted; updateMuteState(); });
+          fullscreen.addEventListener('click', () => {
+            if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+            else if (player.requestFullscreen) player.requestFullscreen().catch(() => {});
+          });
+          video.addEventListener('loadedmetadata', updateTimeline);
+          video.addEventListener('durationchange', updateTimeline);
+          video.addEventListener('timeupdate', updateTimeline);
+          video.addEventListener('play', updatePlayState);
+          video.addEventListener('pause', updatePlayState);
+          video.addEventListener('volumechange', updateMuteState);
+          document.addEventListener('fullscreenchange', () => {
+            fullscreen.setAttribute('aria-label', document.fullscreenElement ? window.StreamaxI18n.text('退出全屏', 'Exit fullscreen') : window.StreamaxI18n.text('进入全屏', 'Enter fullscreen'));
+          });
+          updateTimeline();
+          updatePlayState();
+          updateMuteState();
+        });
+      }
+
+      initCustomVideoPlayers(modal);
 
       function showOptions() {
         optionGrid.hidden = false;
@@ -1755,11 +1834,13 @@
         videoStage.hidden = false;
         missing.hidden = true;
         video.hidden = false;
+        if (videoPlayer) videoPlayer.hidden = false;
         video.load();
       });
       backButton.addEventListener('click', showOptions);
       video.addEventListener('error', function () {
         video.hidden = true;
+        if (videoPlayer) videoPlayer.hidden = true;
         missing.hidden = false;
       }, true);
       document.addEventListener('keydown', function (event) {
@@ -1767,7 +1848,7 @@
       });
     })();
 
-    // Open capability/product entry cards in a new tab so the presentation page stays in place.
+    // Keep internal detail pages in the current tab; only external tools open separately.
     (function () {
       const entrySelectors = [
         'a.fly-node',
@@ -1783,8 +1864,13 @@
       document.querySelectorAll(entrySelectors.join(',')).forEach(function (link) {
         const href = link.getAttribute('href') || '';
         if (!href || href.startsWith('#')) return;
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
+        if (/^https?:\/\//i.test(href)) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          link.removeAttribute('target');
+          link.removeAttribute('rel');
+        }
       });
     })();
 

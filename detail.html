@@ -158,6 +158,16 @@
       background: rgba(0, 0, 0, 0.28); position: relative;
     }
     .video-card video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+    .custom-video-player { position: relative; isolation: isolate; overflow: hidden; background: #000; }
+    .custom-video-player video { position: relative; z-index: 1; display: block; width: 100%; }
+    .custom-video-controls { position: relative; z-index: 5; display: grid; grid-template-columns: auto minmax(110px, 1fr) auto auto auto; gap: 12px; align-items: center; min-height: 52px; padding: 10px 12px; border-top: 1px solid hsl(var(--border) / 0.68); background: hsl(var(--background) / 0.96); pointer-events: auto; }
+    .custom-video-control { display: grid; width: 34px; height: 32px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 8px; background: hsl(var(--secondary) / 0.72); color: hsl(var(--foreground)); cursor: pointer; }
+    .custom-video-control:hover, .custom-video-control:focus-visible { border-color: hsl(var(--ring) / 0.72); color: hsl(var(--ring)); outline: none; }
+    .custom-video-control svg { width: 16px; height: 16px; fill: currentColor; }
+    .custom-video-seek { width: 100%; min-width: 0; accent-color: hsl(var(--ring)); cursor: pointer; }
+    .custom-video-time { color: hsl(var(--muted-foreground)); font-size: 0.7rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .custom-video-player:fullscreen { display: grid; height: 100vh; grid-template-rows: minmax(0, 1fr) auto; background: #000; }
+    .custom-video-player:fullscreen video { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
     .video-caption { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px 14px; font-size: 0.88rem; line-height: 1.45; }
     .video-caption strong { color: hsl(var(--foreground)); }
     .video-caption span { color: hsl(var(--muted-foreground)); }
@@ -199,7 +209,8 @@
     .algorithm-card h4 { margin-bottom: 8px; font-size: 0.98rem; font-weight: 760; letter-spacing: -0.015em; }
     .algorithm-card p { color: hsl(var(--muted-foreground)); font-size: 0.78rem; line-height: 1.58; }
     .algorithm-card-link { margin-top: auto; padding-top: 18px; color: hsl(var(--ring)); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
-    .catalog-more { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; margin-top: 18px; padding: 18px 20px; border: 1px solid hsl(var(--border) / 0.75); border-radius: 14px; background: linear-gradient(90deg, hsl(var(--secondary) / 0.65), hsl(var(--secondary) / 0.38)); }
+    .catalog-more { display: grid; width: 100%; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; margin-top: 18px; padding: 18px 20px; border: 1px solid hsl(var(--border) / 0.75); border-radius: 14px; background: linear-gradient(90deg, hsl(var(--secondary) / 0.65), hsl(var(--secondary) / 0.38)); color: hsl(var(--foreground)); text-align: left; font: inherit; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; }
+    .catalog-more:hover, .catalog-more:focus-visible { transform: translateY(-3px); border-color: hsl(var(--ring) / 0.68); background: linear-gradient(90deg, hsl(var(--secondary) / 0.82), hsl(var(--secondary) / 0.52)); outline: none; }
     .catalog-more-icon { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 12px; color: hsl(var(--ring)); background: hsl(var(--background) / 0.6); }
     .catalog-more-icon svg { width: 24px; height: 24px; }
     .catalog-more strong { display: block; margin-bottom: 5px; font-size: 0.92rem; }
@@ -258,6 +269,7 @@
     @media (max-width: 1380px) { .detail-nav-links { display: none; } .nav { grid-template-columns: 1fr auto; gap: 16px; } }
     @media (max-width: 900px) { .nav { padding-right: 24px; } }
     @media (max-width: 860px) { .shell { width: min(100% - 28px, 680px); } .nav { padding: 14px 24px; } .brand-logo { width: 132px; } .hero { padding: 58px 0 34px; } .live-grid, .gpu-dashboard, .video-grid { grid-template-columns: 1fr; } .video-stage-head { align-items: flex-start; flex-direction: column; } .live-map, .gpu-core { min-height: 360px; } .gpu-stats { grid-template-columns: 1fr; } .algorithm-catalog { padding: 22px; } .catalog-more { grid-template-columns: auto 1fr; } .catalog-more-badge { grid-column: 2; justify-self: start; } .regulation-modal { padding: 14px; } .regulation-dialog { width: 100%; max-height: calc(100vh - 28px); padding: 20px; } .regulation-gallery { grid-template-columns: 1fr; } .regulation-video-list { max-height: 250px; } .content { grid-template-columns: 1fr; padding-bottom: 60px; } .panel { padding: 22px; } }
+    @media (max-width: 620px) { .custom-video-controls { grid-template-columns: auto minmax(70px, 1fr) auto auto; gap: 8px; } .custom-video-time { display: none; } }
     @media (max-width: 480px) { .nav { padding-right: 18px; } .brand-logo { width: 112px; } .back-link { font-size: 0; } .back-link::before { content: "←"; font-size: 1.1rem; } h1 { font-size: clamp(2.7rem, 14vw, 4rem); } .catalog-head h2 { font-size: clamp(1rem, 5.2vw, 1.35rem); letter-spacing: -0.025em; } .catalog-more { grid-template-columns: 1fr; } .catalog-more-badge { grid-column: 1; } }
   </style>
   <link rel="stylesheet" href="detail-background.css?v=20260702-3">
@@ -345,11 +357,10 @@
         <div><span class="catalog-kicker" id="algorithmCatalogKicker">算法目录</span><h2 id="algorithmCatalogTitle">车端算法功能</h2></div>
       </div>
       <div class="algorithm-groups" id="algorithmGroups"></div>
-      <div class="catalog-more">
+      <button class="catalog-more" type="button" data-regulation-video="OTHER-ALGORITHMS" aria-label="打开更多算法功能演示视频">
         <span class="catalog-more-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
         <div><strong id="catalogMoreTitle">更多算法功能</strong></div>
-        <span class="catalog-more-badge" id="catalogMoreBadge">72+ 项能力</span>
-      </div>
+      </button>
     </section>
     <main class="content">
       <div class="primary-column">
@@ -377,7 +388,16 @@
       </header>
       <div class="regulation-gallery" id="regulationVideoGallery">
         <div class="regulation-player-shell">
-          <video class="regulation-player" id="regulationVideoPlayer" controls playsinline preload="metadata"></video>
+          <div class="custom-video-player" data-custom-video-player>
+            <video class="regulation-player" id="regulationVideoPlayer" muted playsinline preload="metadata"></video>
+            <div class="custom-video-controls">
+              <button class="custom-video-control" type="button" data-video-toggle aria-label="Play or pause video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-pause-icon d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button>
+              <input class="custom-video-seek" type="range" min="0" max="0" step="0.05" value="0" data-video-seek aria-label="Seek video">
+              <span class="custom-video-time" data-video-time>0:00 / 0:00</span>
+              <button class="custom-video-control" type="button" data-video-mute aria-label="Unmute video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-volume-icon d="M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z"/></svg></button>
+              <button class="custom-video-control" type="button" data-video-fullscreen aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button>
+            </div>
+          </div>
           <div class="regulation-player-caption">
             <strong id="regulationCurrentVideoTitle">测试视频</strong>
             <span id="regulationCurrentVideoIndex">01 / 06</span>
@@ -392,15 +412,15 @@
     </section>
   </div>
   <script src="i18n.js?v=20260703-1"></script>
-  <script src="algorithm-data.js?v=20260703-9"></script>
-  <script src="compliance-videos.js?v=20260703-2"></script>
+  <script src="algorithm-data.js?v=20260708-1"></script>
+  <script src="compliance-videos.js?v=20260706-3"></script>
   <script>
     const LANG = window.StreamaxI18n.getLanguage();
     const BASE_ZH = {
       'l2-product': ['业务落地与价值', 'L2 舱驾一体化 AEB', '集成座舱监测与自动驾驶辅助的系统级解决方案，实现驾驶员状态感知与紧急制动联动，显著降低事故风险。', ['风险识别|融合驾驶员状态、前向道路和车辆运动状态识别高风险场景。', '舱驾联动|将 DMS 与 AEB、ADAS 联动，形成主动安全回路。', '量产验证|面向客户车型完成联调、标定、测试和交付。'], ['L2|舱驾一体化辅助驾驶', '毫秒级|风险识别与联动', '可量产|面向真实车型集成'], ['疲劳驾驶联动|识别驾驶员异常状态并触发辅助提醒。', '前向碰撞风险|结合车内外信号降低追尾与误触风险。'], ['AEB','DMS','舱驾融合','主动安全']],
       'l4-product': ['业务落地与价值', 'L4 自动驾驶巴士', '面向园区、景区、BRT 等固定路线的 L4 级自动驾驶解决方案，已投入多城市运营，用真实视频展示运营成果。', ['路线感知|融合车辆、道路、信号灯和周边交通参与者信息。', '自动决策|支持红绿灯通行、变道、避障、站点停靠等运营动作。', '安全运营|持续沉淀实车视频、接管记录和运行数据。'], ['L4|固定路线自动驾驶', '多场景|园区、景区、BRT', '运营级|真实道路成果展示'], ['红灯停绿灯行|在真实路口完成交通信号响应。', '拨杆变道与失能控制|展示自动驾驶决策与安全冗余能力。'], ['L4 巴士','实车运营','自动驾驶','安全冗余']],
       'gpu-cards': ['GPU 服务器算力', '高性能 GPU 卡', '自建 GPU 服务器集群统一承载模型训练、样本生成、自动标注和多模态检索推理，向客户展示稳定、可调度、可扩展的算力底座。', ['资源纳管|统一管理 GPU 卡、显存、温度、功耗和节点健康状态。', '任务调度|按训练、生成、标注和检索任务动态分配算力。', '状态监控|实时展示利用率、队列、故障与吞吐，支撑研发资源决策。'], ['128+|高性能 GPU 卡', '76%|集群综合利用率', '24h|全天候训练调度'], ['模型训练|支撑交通场景基础模型预训练与微调。', '样本生成与标注|承载样本补齐、自动标注和批量推理。'], ['GPU 集群','训练调度','显存监控','算力底座']],
-      'vehicle-ai-algorithm': ['算法能力', '车端算法库 72+', '覆盖车内安全、车外感知与交通事件识别的车端算法能力，可按车型、终端算力和业务场景组合交付。', ['算法选型|根据 DMS、ADAS、BSW 等业务需求选择算法组合。', '端侧适配|面向摄像头位置、芯片算力、帧率和功耗约束进行模型压缩与部署。', '场景验证|在真实道路、座舱和运营场景中完成效果评估与版本迭代。'], ['72+|车端算法能力', '多场景|车内、车外、交通事件', '端侧|低功耗实时推理'], ['驾驶安全|疲劳、分心、抽烟、打电话等驾驶员状态识别。', '道路感知|前向碰撞、盲区目标、车道与行人车辆检测。'], ['内部算法功能','外部算法功能','端侧 AI','行为分析']],
+      'vehicle-ai-algorithm': ['算法能力', '车端算法库 72+', '覆盖车内安全、车外感知与交通事件识别的车端算法能力，可按车型、终端算力和业务场景组合交付。', ['算法选型|根据 DMS、ADAS、BSW 等业务需求选择算法组合。', '端侧适配|面向摄像头位置、芯片算力、帧率和功耗约束进行模型压缩与部署。', '场景验证|在真实道路、座舱和运营场景中完成效果评估与版本迭代。'], ['72+|车端算法能力', '多场景|车内、车外、交通事件', '端侧|低功耗实时推理'], ['驾驶安全|疲劳、分心、抽烟、打电话等驾驶员状态识别。', '道路感知|前向碰撞、盲区目标、车道与行人车辆检测。'], ['DMS','人脸识别','APC','体积测量','ADAS','车牌识别','BSW']],
       'safegpt': ['算法理念', 'safeGPT 人因大脑', '以“理解人、关注人、保护人”为核心，把驾驶员状态、道路环境和车辆行为统一到安全认知引擎中。', ['多源感知|融合人脸、姿态、视线、行为、道路与车辆状态等多维信号。', '风险理解|结合研发工具链理解风险上下文，区分偶发动作、持续风险和紧急事件。', '主动干预|输出预警、提醒、联动制动或运营策略建议，形成安全回路。'], ['人因|驾驶员状态理解', '融合|车内外多维信号', '回路|识别、预警、干预'], ['主动安全预警|识别疲劳、分心、遮挡等风险并触发提醒。', '舱驾联动|将座舱监测结果与 AEB、ADAS 等能力协同。'], ['人因安全','模型认知','风险预警','舱驾融合']],
       'data-processing': ['研发交付流程', '数据处理', '将原始路采、运营回流与合作样本转化为可训练、可评测、可追溯的数据资产。', ['数据接入|统一接入视频、CAN、雷达、IMU 与业务元数据，建立样本索引。', '场景筛选|按天气、道路、行为、风险等级筛出高价值片段。', '质量治理|完成清洗、去重、标注校验与版本沉淀。'], ['千万级|设备数据接入', '分钟级|片段检索与分发', '回路|采集到训练全链路'], ['长尾样本挖掘|识别夜间、雨雾、遮挡等稀缺场景。', '训练集构建|面向不同算法任务生成可复用数据包。'], ['数据清洗','场景库','自动标注','版本治理']],
       'model-training': ['研发交付流程', '模型训练', '面向感知、安全与多模态任务，提供从预训练到微调的弹性训练能力。', ['任务配置|定义数据集、模型结构、损失函数与评测口径。', '训练调度|按资源情况进行单卡、多卡和集群任务调度。', '模型归档|沉淀权重、日志、指标与可复现实验记录。'], ['千卡级|弹性训练资源','多模态|视频、图像、文本融合','可追溯|实验版本管理'], ['算法迭代|支撑 DMS、ADAS、BSD 等模型快速迭代。','垂直模型训练|面向交通场景训练专用基础模型。'], ['预训练','微调','实验管理','模型版本']],
@@ -423,6 +443,68 @@
     const topicId = new URLSearchParams(location.search).get('topic') || 'data-processing';
     const topic = BASE[topicId] || BASE['data-processing'];
     const render = (id, rows, cls) => document.getElementById(id).innerHTML = rows.map(row => { const [a,b] = row.split('|'); return `<div class="${cls}"><strong>${a}</strong><span>${b}</span></div>`; }).join('');
+    const customVideoControls = () => {
+      const playLabel = LANG === 'en' ? 'Play or pause video' : '播放或暂停视频';
+      const seekLabel = LANG === 'en' ? 'Seek video' : '拖动视频进度';
+      const soundLabel = LANG === 'en' ? 'Unmute video' : '打开视频声音';
+      const fullscreenLabel = LANG === 'en' ? 'Enter fullscreen' : '进入全屏';
+      return `<div class="custom-video-controls"><button class="custom-video-control" type="button" data-video-toggle aria-label="${playLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-pause-icon d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><input class="custom-video-seek" type="range" min="0" max="0" step="0.05" value="0" data-video-seek aria-label="${seekLabel}"><span class="custom-video-time" data-video-time>0:00 / 0:00</span><button class="custom-video-control" type="button" data-video-mute aria-label="${soundLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-volume-icon d="M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z"/></svg></button><button class="custom-video-control" type="button" data-video-fullscreen aria-label="${fullscreenLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button></div>`;
+    };
+    const customVideoPlayer = (src, label, attributes = 'autoplay muted loop playsinline preload="auto"') => `<div class="custom-video-player" data-custom-video-player><video src="${encodeURI(src)}" ${attributes} aria-label="${label}"></video>${customVideoControls()}</div>`;
+    function initCustomVideoPlayers(root = document) {
+      root.querySelectorAll('[data-custom-video-player]').forEach(player => {
+        if (player.dataset.customVideoReady === 'true') return;
+        player.dataset.customVideoReady = 'true';
+        const video = player.querySelector('video');
+        const toggle = player.querySelector('[data-video-toggle]');
+        const seek = player.querySelector('[data-video-seek]');
+        const time = player.querySelector('[data-video-time]');
+        const mute = player.querySelector('[data-video-mute]');
+        const fullscreen = player.querySelector('[data-video-fullscreen]');
+        const icon = toggle.querySelector('path');
+        const volumeIcon = mute.querySelector('path');
+        const formatTime = seconds => {
+          if (!Number.isFinite(seconds)) return '0:00';
+          const minutes = Math.floor(seconds / 60);
+          const remaining = Math.floor(seconds % 60);
+          return `${minutes}:${String(remaining).padStart(2, '0')}`;
+        };
+        const updateTimeline = () => {
+          const duration = Number.isFinite(video.duration) ? video.duration : 0;
+          seek.max = duration;
+          seek.value = Math.min(video.currentTime || 0, duration);
+          time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
+        };
+        const updatePlayState = () => {
+          icon.setAttribute('d', video.paused ? 'M8 5v14l11-7z' : 'M7 5h4v14H7zm6 0h4v14h-4z');
+          toggle.setAttribute('aria-label', video.paused ? (LANG === 'en' ? 'Play video' : '播放视频') : (LANG === 'en' ? 'Pause video' : '暂停视频'));
+        };
+        const updateMuteState = () => {
+          volumeIcon.setAttribute('d', video.muted || video.volume === 0 ? 'M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z' : 'M4 9v6h4l5 4V5L8 9H4zm11.5-.5a5 5 0 0 1 0 7l-1.4-1.4a3 3 0 0 0 0-4.2l1.4-1.4zm2.8-2.8a9 9 0 0 1 0 12.6l-1.4-1.4a7 7 0 0 0 0-9.8l1.4-1.4z');
+          mute.setAttribute('aria-label', video.muted || video.volume === 0 ? (LANG === 'en' ? 'Unmute video' : '打开视频声音') : (LANG === 'en' ? 'Mute video' : '关闭视频声音'));
+        };
+        toggle.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+        video.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+        seek.addEventListener('input', () => { video.currentTime = Number(seek.value); updateTimeline(); });
+        mute.addEventListener('click', () => { video.muted = !video.muted; updateMuteState(); });
+        fullscreen.addEventListener('click', () => {
+          if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+          else if (player.requestFullscreen) player.requestFullscreen().catch(() => {});
+        });
+        video.addEventListener('loadedmetadata', updateTimeline);
+        video.addEventListener('durationchange', updateTimeline);
+        video.addEventListener('timeupdate', updateTimeline);
+        video.addEventListener('play', updatePlayState);
+        video.addEventListener('pause', updatePlayState);
+        video.addEventListener('volumechange', updateMuteState);
+        document.addEventListener('fullscreenchange', () => {
+          fullscreen.setAttribute('aria-label', document.fullscreenElement ? (LANG === 'en' ? 'Exit fullscreen' : '退出全屏') : (LANG === 'en' ? 'Enter fullscreen' : '进入全屏'));
+        });
+        updateTimeline();
+        updatePlayState();
+        updateMuteState();
+      });
+    }
     document.title = topic[1] + ' - Streamax';
     document.getElementById('category').textContent = topic[0];
     document.getElementById('title').textContent = topic[1];
@@ -435,7 +517,7 @@
       document.getElementById('algorithmCatalogKicker').textContent = LANG === 'en' ? 'Algorithm Catalog' : '算法目录';
       document.getElementById('algorithmCatalogTitle').textContent = LANG === 'en' ? 'On-vehicle Algorithm Functions' : '车端算法功能';
       document.getElementById('catalogMoreTitle').textContent = LANG === 'en' ? 'More Algorithm Functions Available' : '更多算法功能';
-      document.getElementById('catalogMoreBadge').textContent = LANG === 'en' ? '72+ capabilities' : '72+ 项能力';
+      document.querySelector('.catalog-more').setAttribute('aria-label', LANG === 'en' ? 'Open more algorithm function demonstration videos' : '打开更多算法功能演示视频');
       document.getElementById('algorithmGroups').innerHTML = library.groups.map(group => {
         const items = Object.values(library.algorithms).filter(item => item.group === group.id);
         const groupName = LANG === 'en' ? group.en : group.zh;
@@ -451,6 +533,7 @@
         return `<section class="algorithm-group"><div class="algorithm-group-head"><div><h3>${groupName}</h3><p>${groupDescription}</p></div><span class="algorithm-count">${countLabel}</span></div><div class="algorithm-card-grid">${cards}</div></section>`;
       }).join('');
       catalog.classList.add('active');
+      initRegulationVideoGallery();
     }
 
     function initRegulationVideoGallery() {
@@ -475,6 +558,7 @@
       let activeIndex = 0;
       let previousFocus = null;
       let pausedBackgroundVideos = [];
+      initCustomVideoPlayers(modal);
 
       const videoName = video => LANG === 'en' ? video.en : video.zh;
       const countLabel = total => LANG === 'en' ? `${total} ${total === 1 ? 'video' : 'videos'}` : `${total} 个视频`;
@@ -529,16 +613,17 @@
       }
 
       function openGallery(standard, opener) {
+        const isAlgorithmGallery = standard === 'OTHER-ALGORITHMS';
         previousFocus = opener;
         videos = Array.from(library[standard] || []);
         pauseBackgroundVideos();
-        title.textContent = standard;
-        kicker.textContent = LANG === 'en' ? 'Regulation Test Videos' : '法规测试视频';
-        description.textContent = LANG === 'en' ? 'Select a test demonstration video to play.' : '选择测试演示视频进行播放。';
+        title.textContent = isAlgorithmGallery ? (LANG === 'en' ? 'More Algorithm Functions Available' : '更多算法功能') : standard;
+        kicker.textContent = isAlgorithmGallery ? (LANG === 'en' ? 'Algorithm Demonstration Videos' : '算法功能演示') : (LANG === 'en' ? 'Regulation Test Videos' : '法规测试视频');
+        description.textContent = isAlgorithmGallery ? (LANG === 'en' ? 'Select an algorithm demonstration video to play.' : '选择算法功能演示视频进行播放。') : (LANG === 'en' ? 'Select a test demonstration video to play.' : '选择测试演示视频进行播放。');
         playlistLabel.textContent = LANG === 'en' ? 'Video playlist' : '视频列表';
-        playlist.setAttribute('aria-label', LANG === 'en' ? 'Regulation test video playlist' : '法规测试视频列表');
+        playlist.setAttribute('aria-label', isAlgorithmGallery ? (LANG === 'en' ? 'Algorithm demonstration video playlist' : '算法功能演示视频列表') : (LANG === 'en' ? 'Regulation test video playlist' : '法规测试视频列表'));
         count.textContent = countLabel(videos.length);
-        closeButton.setAttribute('aria-label', LANG === 'en' ? 'Close regulation test videos' : '关闭法规测试视频');
+        closeButton.setAttribute('aria-label', isAlgorithmGallery ? (LANG === 'en' ? 'Close algorithm demonstration videos' : '关闭算法功能演示视频') : (LANG === 'en' ? 'Close regulation test videos' : '关闭法规测试视频'));
         modal.hidden = false;
         document.body.classList.add('regulation-modal-open');
         if (videos.length) {
@@ -576,7 +661,7 @@
 
     if (topicId === 'l2-product') {
       const compliancePanel = document.getElementById('compliancePanel');
-      const complianceStandards = ['R131-02', 'R152-02', 'TFL2.5', 'AIS-162'];
+      const complianceStandards = ['R131-02', 'R152-02', 'TFL2.5', 'AIS-162', 'GB-39901', 'JT-T1242'];
       const complianceLibrary = window.ComplianceVideoLibrary || {};
       document.getElementById('complianceTitle').textContent = LANG === 'en' ? 'Regulation Compliance' : '法规合规';
       document.getElementById('complianceList').innerHTML = complianceStandards.map(standard => {
@@ -681,49 +766,87 @@
         jobBox.prepend(jobBox.lastElementChild);
       }, 1700);
     }
-    if (topicId === 'l4-product' || topicId === 'l2-product') {
+    if (topicId === 'l4-product' || topicId === 'l2-product' || topicId === 'safegpt') {
       const productVideo = document.getElementById('productVideo');
       const videoGrid = document.getElementById('videoGrid');
       const videoTitle = document.getElementById('videoTitle');
       const videoSummary = document.getElementById('videoSummary');
       productVideo.classList.add('active');
-      const videos = LANG === 'en'
-        ? (topicId === 'l4-product' ? [
-            ['L4 Autonomous Bus Operations', 'mp4/l4/web/l4-overview.mp4', 'Operations Overview', true],
-            ['Lever-controlled Lane Change', 'mp4/l4/web/lane-change.mp4', 'Autonomous Decision', true],
-            ['Traffic-light Response', 'mp4/l4/web/traffic-light.mp4', 'Signal Response', true],
-            ['Driver Incapacitation Control', 'mp4/l4/web/driver-incapacitation.mp4', 'Safety Redundancy', true]
-          ] : [
-            ['Forward Collision Mitigation Test', 'mp4/l2/converted/粤B41539D-前向碰撞缓解-20251008114615-4086366551429693489.mp4', 'AEB Coordination', true],
-            ['Forward Collision Mitigation', 'mp4/l2/converted/粤B74150D-前向碰撞缓解-20240704085150-2717440483277193223.mp4', 'AEB Coordination', true],
-            ['Right-side Collision Mitigation', 'mp4/l2/converted/粤B84643D-右侧碰撞缓解-20251009174558-4090074338714189845.mp4', 'Side Risk', true],
-            ['Rear Collision Mitigation', 'mp4/l2/converted/粤B97157D-后向碰撞缓解-20240630104236-2705794009439141895.mp4', 'Rear Risk', true]
-          ])
-        : (topicId === 'l4-product' ? [
-            ['L4 自动驾驶巴士实车运营', 'mp4/l4/web/l4-overview.mp4', '运营主片', true],
-            ['拨杆变道', 'mp4/l4/web/lane-change.mp4', '自动决策', true],
-            ['红灯停绿灯行', 'mp4/l4/web/traffic-light.mp4', '信号灯响应', true],
-            ['驾驶失能控制', 'mp4/l4/web/driver-incapacitation.mp4', '安全冗余', true]
-          ] : [
-            ['前向碰撞缓解实车验证', 'mp4/l2/converted/粤B41539D-前向碰撞缓解-20251008114615-4086366551429693489.mp4', 'AEB 联动', true],
-            ['前向碰撞缓解', 'mp4/l2/converted/粤B74150D-前向碰撞缓解-20240704085150-2717440483277193223.mp4', 'AEB 联动', true],
-            ['右侧碰撞缓解', 'mp4/l2/converted/粤B84643D-右侧碰撞缓解-20251009174558-4090074338714189845.mp4', '侧向风险', true],
-            ['后向碰撞缓解', 'mp4/l2/converted/粤B97157D-后向碰撞缓解-20240630104236-2705794009439141895.mp4', '后向风险', true]
-          ]);
-      videoTitle.textContent = LANG === 'en'
-        ? (topicId === 'l4-product' ? 'L4 Field Operation Videos' : 'L2 Field Operation Videos')
-        : (topicId === 'l4-product' ? 'L4 实车运营视频墙' : 'L2 运营视频展示');
-      videoSummary.textContent = LANG === 'en'
-        ? (topicId === 'l4-product'
-            ? 'Real-world operation videos demonstrate the L4 autonomous bus in real operating scenarios.'
-            : 'Muted auto-play videos of L2 cabin-driving integrated AEB real-vehicle validation demonstrate forward collision mitigation and other proactive safety capabilities.')
-        : (topicId === 'l4-product'
-            ? '所有片段进入页面后自动静音播放，集中展示 L4 自动驾驶巴士在真实运营场景中的能力。'
-            : '进入页面后自动静音播放 L2 舱驾一体化 AEB 实车验证视频，展示前向碰撞缓解等主动安全能力。');
+      const videoContent = {
+        'l4-product': {
+          en: {
+            title: 'L4 Field Operation Videos',
+            summary: 'Real-world operation videos demonstrate the L4 autonomous bus in real operating scenarios.',
+            videos: [
+              ['L4 Autonomous Bus Operations', 'mp4/l4/web/l4-overview.mp4', 'Operations Overview', true],
+              ['Lever-controlled Lane Change', 'mp4/l4/web/lane-change.mp4', 'Autonomous Decision', true],
+              ['Traffic-light Response', 'mp4/l4/web/traffic-light.mp4', 'Signal Response', true],
+              ['Driver Incapacitation Control', 'mp4/l4/web/driver-incapacitation.mp4', 'Safety Redundancy', true]
+            ]
+          },
+          zh: {
+            title: 'L4 实车运营视频墙',
+            summary: '所有片段进入页面后自动静音播放，集中展示 L4 自动驾驶巴士在真实运营场景中的能力。',
+            videos: [
+              ['L4 自动驾驶巴士实车运营', 'mp4/l4/web/l4-overview.mp4', '运营主片', true],
+              ['拨杆变道', 'mp4/l4/web/lane-change.mp4', '自动决策', true],
+              ['红灯停绿灯行', 'mp4/l4/web/traffic-light.mp4', '信号灯响应', true],
+              ['驾驶失能控制', 'mp4/l4/web/driver-incapacitation.mp4', '安全冗余', true]
+            ]
+          }
+        },
+        'l2-product': {
+          en: {
+            title: 'L2 Field Operation Videos',
+            summary: 'Muted auto-play videos of L2 cabin-driving integrated AEB real-vehicle validation demonstrate forward collision mitigation and other proactive safety capabilities.',
+            videos: [
+              ['Forward Collision Mitigation Test', 'mp4/l2/converted/粤B41539D-前向碰撞缓解-20251008114615-4086366551429693489.mp4', 'AEB Coordination', true],
+              ['Forward Collision Mitigation', 'mp4/l2/converted/粤B74150D-前向碰撞缓解-20240704085150-2717440483277193223.mp4', 'AEB Coordination', true],
+              ['Right-side Collision Mitigation', 'mp4/l2/converted/粤B84643D-右侧碰撞缓解-20251009174558-4090074338714189845.mp4', 'Side Risk', true],
+              ['Rear Collision Mitigation', 'mp4/l2/converted/粤B97157D-后向碰撞缓解-20240630104236-2705794009439141895.mp4', 'Rear Risk', true]
+            ]
+          },
+          zh: {
+            title: 'L2 运营视频展示',
+            summary: '进入页面后自动静音播放 L2 舱驾一体化 AEB 实车验证视频，展示前向碰撞缓解等主动安全能力。',
+            videos: [
+              ['前向碰撞缓解实车验证', 'mp4/l2/converted/粤B41539D-前向碰撞缓解-20251008114615-4086366551429693489.mp4', 'AEB 联动', true],
+              ['前向碰撞缓解', 'mp4/l2/converted/粤B74150D-前向碰撞缓解-20240704085150-2717440483277193223.mp4', 'AEB 联动', true],
+              ['右侧碰撞缓解', 'mp4/l2/converted/粤B84643D-右侧碰撞缓解-20251009174558-4090074338714189845.mp4', '侧向风险', true],
+              ['后向碰撞缓解', 'mp4/l2/converted/粤B97157D-后向碰撞缓解-20240630104236-2705794009439141895.mp4', '后向风险', true]
+            ]
+          }
+        },
+        safegpt: {
+          en: {
+            title: 'safeGPT Demonstration Videos',
+            summary: 'Demonstrations show how safeGPT combines human-factor signals, road perception, and contextual risk evaluation to support proactive safety decisions.',
+            videos: [
+              ['Integrated Risk Understanding', 'mp4/safegpt/web/safegpt-integrated-highlight.mp4', 'Multi-risk Fusion', true],
+              ['Lane Departure Risk Analysis', 'mp4/safegpt/web/safegpt-lane-departure.mp4', 'Road Risk', true],
+              ['Accident Risk Evaluation', 'mp4/safegpt/web/safegpt-accident-risk.mp4', 'Risk Evaluation', true],
+              ['Driver Fatigue and Behavior Risk Analysis', 'mp4/safegpt/web/safegpt-smoking-risk.mp4', 'Human Factors', true]
+            ]
+          },
+          zh: {
+            title: 'safeGPT 演示视频',
+            summary: '演示 safeGPT 如何融合人因信号、道路感知与风险上下文评估，为主动安全决策提供支持。',
+            videos: [
+              ['综合风险理解', 'mp4/safegpt/web/safegpt-integrated-highlight.mp4', '多风险融合', true],
+              ['车道偏离风险分析', 'mp4/safegpt/web/safegpt-lane-departure.mp4', '道路风险', true],
+              ['事故风险评估', 'mp4/safegpt/web/safegpt-accident-risk.mp4', '风险评估', true],
+              ['驾驶员疲劳与行为风险分析', 'mp4/safegpt/web/safegpt-smoking-risk.mp4', '人因安全', true]
+            ]
+          }
+        }
+      }[topicId][LANG];
+      const videos = videoContent.videos;
+      videoTitle.textContent = videoContent.title;
+      videoSummary.textContent = videoContent.summary;
       if (videos.length) {
         videoGrid.innerHTML = videos.map(([name, src, tag, playable]) => playable ? `
           <article class="video-card">
-            <video src="${encodeURI(src)}" autoplay muted loop playsinline controls preload="auto"></video>
+            ${customVideoPlayer(src, name)}
             <div class="video-caption"><strong>${name}</strong><span>${tag}</span></div>
           </article>
         ` : `
@@ -745,6 +868,7 @@
           });
           video.play().catch(() => {});
         });
+        initCustomVideoPlayers(videoGrid);
       }
     }
     document.querySelectorAll('[data-return-home]').forEach(link => {

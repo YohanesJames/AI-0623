@@ -73,17 +73,17 @@
       overviewTitleEn: 'Driver State and Risk-behavior Awareness',
       overviewZh: 'DMS 通过座舱摄像头与 AI 算法实时监测驾驶员状态，识别疲劳、分心、异常行为与安全合规风险，同时监控摄像头遮挡和人脸可见状态。',
       overviewEn: 'DMS uses in-cabin camera perception and AI algorithms to monitor driver status in real time, identify fatigue, distraction, unsafe behavior, and safety-compliance risks, and monitor camera occlusion and face availability.',
-      mediaTitleZh: '计划演示视频',
-      mediaTitleEn: 'Planned Demonstration Videos',
-      mediaSummaryZh: '以下六项演示位置已预留，视频文件添加后即可直接展示。',
-      mediaSummaryEn: 'Six demonstration slots are prepared and will display the videos once the files are provided.',
-      plannedVideos: [
-        { zh: '疲劳驾驶检测', en: 'Fatigue Driving Detection' },
-        { zh: '抽烟检测', en: 'Smoking Detection' },
-        { zh: '未系安全带检测', en: 'Unfastened Seat Belt Detection' },
-        { zh: '使用手机检测', en: 'Mobile Phone Use Detection' },
-        { zh: '进食和饮水检测', en: 'Eating and Drinking Detection' },
-        { zh: '镜头遮挡检测', en: 'Lens Occlusion Detection' }
+      mediaTitleZh: 'DMS 功能演示视频',
+      mediaTitleEn: 'DMS Function Demonstration Videos',
+      mediaSummaryZh: '展示疲劳驾驶、抽烟、未系安全带、使用手机、进食饮水与镜头遮挡等驾驶员监测场景。',
+      mediaSummaryEn: 'Demonstrations show fatigue driving, smoking, unfastened seat belt, mobile phone use, eating and drinking, and lens occlusion detection scenarios.',
+      videos: [
+        { src: 'mp4/DMS/web/fatigue-driving-detection.mp4', zh: '疲劳驾驶检测', en: 'Fatigue Driving Detection', fit: 'contain' },
+        { src: 'mp4/DMS/web/smoking-detection.mp4', zh: '抽烟检测', en: 'Smoking Detection', fit: 'contain' },
+        { src: 'mp4/DMS/web/unfastened-seat-belt-detection.mp4', zh: '未系安全带检测', en: 'Unfastened Seat Belt Detection', fit: 'contain' },
+        { src: 'mp4/DMS/web/mobile-phone-use-detection.mp4', zh: '使用手机检测', en: 'Mobile Phone Use Detection', fit: 'contain' },
+        { src: 'mp4/DMS/web/eating-and-drinking-detection.mp4', zh: '进食和饮水检测', en: 'Eating and Drinking Detection', fit: 'contain' },
+        { src: 'mp4/DMS/web/lens-occlusion-detection.mp4', zh: '镜头遮挡检测', en: 'Lens Occlusion Detection', fit: 'contain' }
       ],
       metrics: [
         { valueZh: '实时', valueEn: 'Real Time', labelZh: '驾驶员状态与行为监测', labelEn: 'Driver-state and behavior monitoring' },
@@ -106,6 +106,36 @@
         { titleZh: '进食和饮水检测', titleEn: 'Eating and Drinking Detection', bodyZh: '识别驾驶过程中的进食或饮水行为，并根据行为持续时间触发告警。', bodyEn: 'Detects eating or drinking while driving and triggers an alarm based on the behavior duration.' }
       ]
     },
+    'facial-recognition': {
+      pageTitleZh: '人脸识别',
+      pageTitleEn: 'Facial Recognition',
+      statusZh: '视觉身份搜索、核验与抓拍记录',
+      statusEn: 'Visual identity search, verification, and capture records',
+      overviewTitleZh: '视觉身份搜索与核验',
+      overviewTitleEn: 'Visual Identity Search and Verification',
+      overviewZh: '人脸识别算法通过摄像头检测人脸、提取特征并与已录入的人员信息进行匹配，可用于授权驾驶员核验、人员搜索与抓拍记录管理。系统将图像中的人脸转化为可检索的身份特征，为座舱安全、人员通行与运营追溯提供结构化结果。',
+      overviewEn: 'Facial-recognition algorithms use camera images to detect faces, extract identity features, and compare them with enrolled personnel records. The capability supports authorized-driver verification, person search, and captured-event management by converting visible faces into searchable identity features for cabin safety, personnel access, and operational traceability.',
+      mediaTitleZh: '人脸识别演示',
+      mediaTitleEn: 'Facial Recognition Demonstration',
+      mediaSummaryZh: '展示人脸抓拍、身份搜索与匹配结果的可视化工作流程。',
+      mediaSummaryEn: 'The demonstration shows a visual workflow for face capture, identity search, and matching results.',
+      videos: [
+        { src: 'mp4/Facial Recognition/web/facial-recognition.mp4', zh: '人脸身份搜索与抓拍', en: 'Facial Identity Search and Capture' }
+      ],
+      metrics: [
+        { valueZh: '摄像头 + AI', valueEn: 'Camera + AI', labelZh: '非接触式视觉身份分析', labelEn: 'Contactless visual identity analysis' },
+        { valueZh: '搜索与匹配', valueEn: 'Search & Match', labelZh: '通过抓拍人脸检索身份', labelEn: 'Identity retrieval from captured faces' },
+        { valueZh: '抓拍记录', valueEn: 'Capture Records', labelZh: '可查询的识别事件结果', labelEn: 'Traceable recognition-event results' }
+      ],
+      capabilitiesTitleZh: '人脸识别核心能力',
+      capabilitiesTitleEn: 'Core Facial-recognition Capabilities',
+      capabilities: [
+        { titleZh: '人脸检测与抓拍', titleEn: 'Face Detection and Capture', bodyZh: '在摄像头画面中定位人脸，并从连续视频中生成可用于识别的抓拍图像。', bodyEn: 'Locates faces in camera images and produces usable identity snapshots from continuous video.' },
+        { titleZh: '特征提取与质量筛选', titleEn: 'Feature Extraction and Quality Filtering', bodyZh: '提取稳定的人脸特征，并通过清晰度、姿态和可见性等条件筛选有效抓拍。', bodyEn: 'Extracts stable facial features and filters captures using image clarity, pose, and visibility conditions.' },
+        { titleZh: '身份搜索与匹配', titleEn: 'Identity Search and Matching', bodyZh: '将抓拍特征与已录入人员库进行比对，输出候选身份与匹配结果。', bodyEn: 'Compares captured features with enrolled personnel records and returns candidate identities and matching results.' },
+        { titleZh: '识别事件与记录管理', titleEn: 'Recognition Events and Records', bodyZh: '将抓拍时间、图像、匹配身份与设备信息组织为可检索的结构化记录。', bodyEn: 'Organizes capture time, image, matched identity, and device information into searchable structured records.' }
+      ]
+    },
     'p3-passenger-flow': {
       pageTitleZh: '自动客流统计系统（APC）',
       pageTitleEn: 'Auto Person Counter (APC)',
@@ -115,17 +145,12 @@
       overviewTitleEn: 'Intelligent Passenger-flow Monitoring for Public Transport',
       overviewZh: 'AutoPersonCounter（APC）是一套面向公交车、旅游车辆及其他客运场景的 AI 客流监测系统，可实时测量、分析和管理乘客流动，为线路优化、服务效率、安全保障与业务分析提供可靠数据。',
       overviewEn: 'AutoPersonCounter (APC) is an AI passenger-flow monitoring system for buses, tourist vehicles, and other passenger-transport scenarios. It measures, analyzes, and manages passenger movement in real time, providing reliable data for route optimization, service efficiency, safety, and business analysis.',
-      mediaTitleZh: '计划功能演示视频',
-      mediaTitleEn: 'Planned Function Videos',
-      mediaSummaryZh: '六项 APC 核心功能均已预留演示位置，后续添加视频文件即可直接展示。',
-      mediaSummaryEn: 'A demonstration slot is prepared for each of the six APC functions and will display the video once its file is added.',
-      plannedVideos: [
-        { zh: '客流统计', en: 'Passenger Flow Counting' },
-        { zh: '身高估算', en: 'Height Estimation' },
-        { zh: 'OD 智能跟踪', en: 'OD Intelligent Tracking' },
-        { zh: '物品计数', en: 'Item Counting' },
-        { zh: '车门状态检测', en: 'Door Status Detection' },
-        { zh: '自动标定', en: 'Self-Calibration' }
+      mediaTitleZh: 'APC 功能演示',
+      mediaTitleEn: 'APC Function Demonstration',
+      mediaSummaryZh: '一个综合演示视频集中展示 APC 的六项核心功能。',
+      mediaSummaryEn: 'One integrated demonstration video presents all six core APC functions.',
+      videos: [
+        { src: 'mp4/APC/web/apc-integrated-function-demonstration.mp4', zh: 'APC 综合功能演示', en: 'APC Integrated Function Demonstration', customControls: true }
       ],
       metrics: [
         { valueZh: '实时客流统计', valueEn: 'Real-time Passenger Count', labelZh: '上下客人数统计', labelEn: 'Boarding & alighting statistics' },
@@ -152,15 +177,15 @@
       overviewTitleEn: 'Advanced ADAS Perception and Warning Intelligence',
       overviewZh: 'ADAS 算法融合交通标志识别、车辆感知、行人检测与车道线理解，为更安全的驾驶决策提供支持。系统适配多区域道路标志，可同时监测本车道与相邻车道目标，并在复杂光照与道路条件下保持稳定可靠的感知能力。',
       overviewEn: 'The ADAS algorithms combine traffic-sign recognition, vehicle perception, pedestrian detection, and lane-line understanding to support safer driving decisions. They adapt to multi-region road signs, monitor targets across the ego and adjacent lanes, and maintain reliable perception under complex lighting and road conditions.',
-      mediaTitleZh: '计划功能演示视频',
-      mediaTitleEn: 'Planned Function Videos',
-      mediaSummaryZh: '已为 TSR、FCW、PCW 与 LDW 四项功能分别预留演示位置，后续添加视频文件即可直接展示。',
-      mediaSummaryEn: 'A dedicated demonstration slot is prepared for TSR, FCW, PCW, and LDW and will display each video once its file is added.',
-      plannedVideos: [
-        { zh: 'TSR — 交通标志识别', en: 'TSR — Traffic Sign Recognition' },
-        { zh: 'FCW — 前向碰撞预警', en: 'FCW — Forward Collision Warning' },
-        { zh: 'PCW — 行人碰撞预警', en: 'PCW — Pedestrian Collision Warning' },
-        { zh: 'LDW — 车道偏离预警', en: 'LDW — Lane Departure Warning' }
+      mediaTitleZh: 'ADAS 功能演示视频',
+      mediaTitleEn: 'ADAS Function Demonstration Videos',
+      mediaSummaryZh: '通过 TSR、FCW、PCW 与 LDW 实际演示，直观展示交通标志识别、前向碰撞预警、行人碰撞预警和车道偏离预警能力。',
+      mediaSummaryEn: 'Discover how TSR, FCW, PCW, and LDW perform in real driving scenarios through dedicated demonstration videos.',
+      videos: [
+        { src: 'mp4/ADAS/TSR.mp4', zh: 'TSR — 交通标志识别', en: 'TSR — Traffic Sign Recognition', customControls: true, fit: 'contain', aspect: 'tsr' },
+        { src: 'mp4/ADAS/FCW.mp4', zh: 'FCW — 前向碰撞预警', en: 'FCW — Forward Collision Warning', customControls: true },
+        { src: 'mp4/ADAS/PCW.mp4', zh: 'PCW — 行人碰撞预警', en: 'PCW — Pedestrian Collision Warning', customControls: true },
+        { src: 'mp4/ADAS/LDW.mp4', zh: 'LDW — 车道偏离预警', en: 'LDW — Lane Departure Warning', customControls: true }
       ],
       metrics: [
         { valueZh: '4 项功能', valueEn: '4 Functions', labelZh: 'TSR · FCW · PCW · LDW', labelEn: 'TSR · FCW · PCW · LDW' },
@@ -194,6 +219,36 @@
           bodyZh: '识别车道标线及其类型，以判断车辆在车道内的位置。算法支持实线、虚线及其他车道标线形式，并可在强逆光、标线模糊和复杂道路环境下保持稳定的车道感知。',
           bodyEn: 'Recognizes lane markings and lane-line types to determine the vehicle’s position within the lane. The algorithm supports solid, dashed, and other lane-marking patterns, and maintains lane perception under challenging conditions such as strong backlight, blurred markings, and complex road environments.'
         }
+      ]
+    },
+    'license-plate-recognition': {
+      pageTitleZh: '车牌识别',
+      pageTitleEn: 'License Plate Recognition',
+      statusZh: '基于摄像头的车辆身份识别与记录',
+      statusEn: 'Camera-based vehicle identity recognition and records',
+      overviewTitleZh: '从道路图像中提取结构化车辆身份',
+      overviewTitleEn: 'Structured Vehicle Identity from Road Images',
+      overviewZh: '车牌识别算法在道路或出入口摄像头画面中定位车牌区域，完成图像校正、字符识别与结果结构化。识别结果可与时间、地点、设备和车辆图像关联，用于车辆通行、车队运营、事件检索与记录追溯。',
+      overviewEn: 'License-plate recognition locates plate regions in road or access-camera images, normalizes the plate view, recognizes its characters, and produces structured results. The recognized plate can be associated with time, location, device, and vehicle images to support vehicle access, fleet operations, event search, and record traceability.',
+      mediaTitleZh: '车牌识别演示',
+      mediaTitleEn: 'License Plate Recognition Demonstration',
+      mediaSummaryZh: '该演示展示巴西车牌场景中的车辆检测、车牌定位与识别结果。',
+      mediaSummaryEn: 'The demonstration presents vehicle detection, plate localization, and recognition results in a license plate scenario in Brazil.',
+      videos: [
+        { src: 'mp4/licenseplate/web/license-plate-recognition.mp4', zh: '巴西车牌识别演示', en: 'Brazil License Plate Recognition Demonstration', fit: 'contain', aspect: 'license' }
+      ],
+      metrics: [
+        { valueZh: '摄像头感知', valueEn: 'Camera-based', labelZh: '无需人工输入的车牌提取', labelEn: 'Plate extraction without manual input' },
+        { valueZh: '结构化输出', valueEn: 'Structured Output', labelZh: '车牌字符与事件信息', labelEn: 'Plate characters and event information' },
+        { valueZh: '运营记录', valueEn: 'Operational Records', labelZh: '通行、检索与追溯', labelEn: 'Access, search, and traceability' }
+      ],
+      capabilitiesTitleZh: '车牌识别核心能力',
+      capabilitiesTitleEn: 'Core License-plate Recognition Capabilities',
+      capabilities: [
+        { titleZh: '车辆与车牌定位', titleEn: 'Vehicle and Plate Localization', bodyZh: '在道路画面中检测车辆并定位可用于识别的车牌区域。', bodyEn: 'Detects vehicles in road images and locates plate regions suitable for recognition.' },
+        { titleZh: '车牌图像校正', titleEn: 'Plate-image Normalization', bodyZh: '对车牌区域进行裁剪、角度校正与图像增强，提高字符可读性。', bodyEn: 'Crops, rectifies, and enhances the plate region to improve character readability.' },
+        { titleZh: '字符识别与结果解析', titleEn: 'Character Recognition and Parsing', bodyZh: '识别车牌字母、数字及区域结构，并输出标准化车牌结果。', bodyEn: 'Recognizes plate letters, numbers, and regional structure, then returns a normalized plate result.' },
+        { titleZh: '多帧关联与事件记录', titleEn: 'Multi-frame Association and Event Records', bodyZh: '将连续帧中的同一车辆结果进行关联，并形成带有时间、地点与设备信息的车辆事件。', bodyEn: 'Associates the same vehicle across consecutive frames and creates events containing time, location, and device information.' }
       ]
     },
     bsw: {
@@ -242,7 +297,7 @@
       videos: [
         { src: 'mp4/Volume Measurement/web/cargo-volume-load-rate.mp4', zh: '货物体积与装载率估算', en: 'Cargo Volume & Load Rate Estimation' },
         { src: 'mp4/Volume Measurement/web/remaining-load-space.mp4', zh: '剩余装载空间测量', en: 'Remaining Load Space Measurement' },
-        { src: 'mp4/Volume Measurement/web/cargo-securing-monitor.mp4', zh: '货物固定状态监测', en: 'Cargo Securing Monitor' }
+        { src: 'mp4/Volume Measurement/web/cargo-securing-monitor.mp4', zh: '货物固定状态监测', en: 'Cargo Securing Monitor', aspect: 'cargo-securing' }
       ],
       metrics: [
         { valueZh: '单摄像头', valueEn: 'Single Camera', labelZh: '无需雷达', labelEn: 'No radar required' },

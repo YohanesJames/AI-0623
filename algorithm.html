@@ -35,15 +35,39 @@
     .panel-head { display: grid; grid-template-columns: minmax(0, .75fr) minmax(280px, 1.25fr); gap: 28px; align-items: end; margin-bottom: 28px; }
     .panel-head h2 { font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.045em; }
     .panel-head p { color: hsl(var(--muted-foreground)); font-size: .9rem; line-height: 1.7; }
+    #mediaPanel.adas-media .panel-head { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+    #mediaPanel.adas-media .panel-head h2 { max-width: 100%; font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.05; text-wrap: balance; }
+    #mediaPanel.adas-media .panel-head p { max-width: 800px; }
     .roadmap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .roadmap-card { min-height: 150px; padding: 18px; border: 1px dashed hsl(var(--border)); border-radius: 12px; background: hsl(var(--secondary) / .38); }
     .roadmap-card strong { display: block; margin-bottom: 26px; font-size: .94rem; }
     .roadmap-card span { color: hsl(var(--muted-foreground)); font-size: .75rem; }
     .algorithm-video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
     .algorithm-video-grid.four-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .algorithm-video-card { overflow: hidden; border: 1px solid hsl(var(--border) / .76); border-radius: 13px; background: hsl(var(--secondary) / .45); }
+    .algorithm-video-card { align-self: start; overflow: hidden; border: 1px solid hsl(var(--border) / .76); border-radius: 13px; background: hsl(var(--secondary) / .45); }
     .algorithm-video-card video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: cover; }
+    .algorithm-video-card video.video-contain { object-fit: contain; }
+    .algorithm-video-card video.video-license-ratio { aspect-ratio: 27 / 20; }
+    .algorithm-video-card video.video-tsr-ratio { aspect-ratio: 98 / 45; }
     .algorithm-video-card figcaption { padding: 12px 14px; color: hsl(var(--foreground)); font-size: .78rem; font-weight: 600; }
+    #mediaPanel.volume-media .algorithm-video-card video { aspect-ratio: 640 / 569; object-fit: contain; }
+    #mediaPanel.volume-media .custom-video-controls { min-height: 42px; padding: 7px 10px; gap: 10px; }
+    #mediaPanel.volume-media .custom-video-control { width: 30px; height: 30px; border-radius: 8px; }
+    #mediaPanel.volume-media .custom-video-control svg { width: 14px; height: 14px; }
+    #mediaPanel.volume-media .custom-video-time { font-size: .68rem; }
+    #mediaPanel.volume-media .custom-video-player:has(video.video-cargo-securing-ratio) { background: #f5f7f3; }
+    #mediaPanel.volume-media .algorithm-video-card video.video-cargo-securing-ratio { aspect-ratio: 640 / 569; object-fit: contain; background: #f5f7f3; }
+    .custom-video-player { position: relative; isolation: isolate; overflow: hidden; background: #000; }
+    .custom-video-player video { position: relative; z-index: 1; }
+    .custom-video-controls { position: relative; z-index: 5; display: grid; grid-template-columns: auto minmax(110px, 1fr) auto auto auto; gap: 12px; align-items: center; min-height: 52px; padding: 10px 12px; border-top: 1px solid hsl(var(--border) / .68); background: hsl(var(--background) / .96); pointer-events: auto; }
+    .custom-video-control { display: grid; width: 34px; height: 32px; place-items: center; border: 1px solid hsl(var(--border)); border-radius: 8px; background: hsl(var(--secondary) / .72); color: hsl(var(--foreground)); cursor: pointer; }
+    .custom-video-control:hover, .custom-video-control:focus-visible { border-color: hsl(var(--ring) / .72); color: hsl(var(--ring)); outline: none; }
+    .custom-video-control svg { width: 16px; height: 16px; fill: currentColor; }
+    .custom-video-seek { width: 100%; min-width: 0; accent-color: hsl(var(--ring)); cursor: pointer; }
+    .custom-video-time { color: hsl(var(--muted-foreground)); font-size: .7rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .custom-video-player:fullscreen { display: grid; height: 100vh; grid-template-rows: minmax(0, 1fr) auto; background: #000; }
+    .custom-video-player:fullscreen video { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
+    @media (max-width: 620px) { .custom-video-controls { grid-template-columns: auto minmax(70px, 1fr) auto auto; gap: 8px; } .custom-video-time { display: none; } }
     .algorithm-video-placeholder { overflow: hidden; border: 1px dashed hsl(var(--border)); border-radius: 13px; background: hsl(var(--secondary) / .34); }
     .placeholder-visual { display: grid; aspect-ratio: 16 / 9; place-items: center; background: radial-gradient(circle at 50% 50%, hsl(var(--ring) / .09), transparent 55%), hsl(var(--background) / .46); }
     .placeholder-visual span { padding: 7px 10px; border: 1px solid hsl(var(--border)); border-radius: 7px; color: hsl(var(--ring)); font-size: .65rem; font-weight: 700; letter-spacing: .14em; }
@@ -100,12 +124,13 @@
     @keyframes regulationDialogIn { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .cta { display: inline-flex; margin-top: 22px; padding: 12px 16px; border-radius: 10px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-size: .86rem; font-weight: 700; }
     .rich-detail > .cta { justify-self: start; width: auto; margin-top: 2px; padding: 9px 12px; font-size: .76rem; }
+    body.algorithm-page .language-switcher { top: 86px; right: max(16px, env(safe-area-inset-right)); bottom: auto; }
     @media (max-width: 980px) { .capability-grid.dense { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 760px) { .shell { width: min(100% - 28px, 680px); } .brand-logo { width: 132px; } .hero { grid-template-columns: 1fr; padding-top: 58px; } .hero-icon { width: 72px; height: 72px; border-radius: 18px; } .hero-icon svg { width: 36px; height: 36px; } h1.long-title { white-space: normal; font-size: clamp(2.15rem, 10vw, 3.35rem); } .panel-head, .roadmap-grid, .overview-grid, .capability-grid, .capability-grid.dense, .algorithm-regulation-gallery, .algorithm-video-grid.four-up { grid-template-columns: 1fr; } .algorithm-regulation-modal { padding: 14px; } .algorithm-regulation-dialog { max-height: calc(100vh - 28px); padding: 20px; } .algorithm-regulation-list { max-height: 250px; } .roadmap-card { min-height: 122px; } .capability-card { min-height: 148px; } }
   </style>
   <link rel="stylesheet" href="detail-background.css?v=20260702-3">
 </head>
-<body>
+<body class="algorithm-page">
   <div class="shell">
     <div class="nav-shell">
       <nav class="nav">
@@ -153,14 +178,14 @@
         <button class="algorithm-regulation-close" type="button" data-algorithm-regulation-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </header>
       <div class="algorithm-regulation-gallery">
-        <div class="algorithm-regulation-player-shell"><video class="algorithm-regulation-player" id="algorithmRegulationPlayer" controls playsinline preload="metadata"></video><div class="algorithm-regulation-caption"><strong id="algorithmRegulationCurrentTitle"></strong><span id="algorithmRegulationCurrentIndex"></span></div></div>
+        <div class="algorithm-regulation-player-shell"><div class="custom-video-player" data-custom-video-player><video class="algorithm-regulation-player" id="algorithmRegulationPlayer" muted playsinline preload="metadata"></video><div class="custom-video-controls"><button class="custom-video-control" type="button" data-video-toggle aria-label="Play or pause video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-pause-icon d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><input class="custom-video-seek" type="range" min="0" max="0" step="0.05" value="0" data-video-seek aria-label="Seek video"><span class="custom-video-time" data-video-time>0:00 / 0:00</span><button class="custom-video-control" type="button" data-video-mute aria-label="Unmute video"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-volume-icon d="M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z"/></svg></button><button class="custom-video-control" type="button" data-video-fullscreen aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button></div></div><div class="algorithm-regulation-caption"><strong id="algorithmRegulationCurrentTitle"></strong><span id="algorithmRegulationCurrentIndex"></span></div></div>
         <aside class="algorithm-regulation-playlist"><div class="algorithm-regulation-playlist-head"><span id="algorithmRegulationPlaylistLabel"></span><span id="algorithmRegulationPlaylistCount"></span></div><div class="algorithm-regulation-list" id="algorithmRegulationList"></div></aside>
       </div>
     </section>
   </div>
   <script src="i18n.js?v=20260703-1"></script>
-  <script src="algorithm-data.js?v=20260703-9"></script>
-  <script src="compliance-videos.js?v=20260703-2"></script>
+  <script src="algorithm-data.js?v=20260708-1"></script>
+  <script src="compliance-videos.js?v=20260706-3"></script>
   <script>
     const LANG = window.StreamaxI18n.getLanguage();
     const library = window.AlgorithmLibrary;
@@ -201,6 +226,8 @@
       document.getElementById('capabilityTitle').textContent = localized(detail, 'capabilitiesTitle');
       const regulationVideos = detail.regulationKey ? Array.from((window.ComplianceVideoLibrary || {})[detail.regulationKey] || []) : [];
       const mediaPanel = document.getElementById('mediaPanel');
+      mediaPanel.classList.toggle('adas-media', algorithm.id === 'adas');
+      mediaPanel.classList.toggle('volume-media', algorithm.id === 'volume-measurement');
       const videos = detail.videos || [];
       const plannedVideos = detail.plannedVideos || [];
       if (videos.length || plannedVideos.length) {
@@ -212,7 +239,18 @@
       }
       const renderedVideos = videos.map(video => {
         const videoTitle = LANG === 'en' ? video.en : video.zh;
-        return `<figure class="algorithm-video-card"><video controls autoplay muted loop playsinline preload="auto" aria-label="${videoTitle}"><source src="${video.src}" type="video/mp4"></video><figcaption>${videoTitle}</figcaption></figure>`;
+        const videoClasses = [
+          video.fit === 'contain' ? 'video-contain' : '',
+          video.aspect === 'license' ? 'video-license-ratio' : '',
+          video.aspect === 'tsr' ? 'video-tsr-ratio' : '',
+          video.aspect === 'cargo-securing' ? 'video-cargo-securing-ratio' : ''
+        ].filter(Boolean);
+        const classAttribute = videoClasses.length ? ` class="${videoClasses.join(' ')}"` : '';
+        const playLabel = LANG === 'en' ? 'Play or pause video' : '播放或暂停视频';
+        const seekLabel = LANG === 'en' ? 'Seek video' : '拖动视频进度';
+        const soundLabel = LANG === 'en' ? 'Unmute video' : '打开视频声音';
+        const fullscreenLabel = LANG === 'en' ? 'Enter fullscreen' : '进入全屏';
+        return `<figure class="algorithm-video-card"><div class="custom-video-player" data-custom-video-player><video${classAttribute} autoplay muted loop playsinline preload="auto" aria-label="${videoTitle}"><source src="${video.src}" type="video/mp4"></video><div class="custom-video-controls"><button class="custom-video-control" type="button" data-video-toggle aria-label="${playLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-pause-icon d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><input class="custom-video-seek" type="range" min="0" max="0" step="0.05" value="0" data-video-seek aria-label="${seekLabel}"><span class="custom-video-time" data-video-time>0:00 / 0:00</span><button class="custom-video-control" type="button" data-video-mute aria-label="${soundLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path data-volume-icon d="M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z"/></svg></button><button class="custom-video-control" type="button" data-video-fullscreen aria-label="${fullscreenLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg></button></div></div><figcaption>${videoTitle}</figcaption></figure>`;
       });
       const renderedPlaceholders = plannedVideos.map(video => {
         const videoTitle = LANG === 'en' ? video.en : video.zh;
@@ -222,6 +260,7 @@
       });
       document.getElementById('algorithmVideoGrid').classList.toggle('four-up', videos.length + plannedVideos.length === 4);
       document.getElementById('algorithmVideoGrid').innerHTML = renderedVideos.concat(renderedPlaceholders).join('');
+      initCustomVideoPlayers();
       document.getElementById('algorithmMetricGrid').innerHTML = detail.metrics.map(metric => {
         const content = `<strong>${localized(metric, 'value')}</strong><span>${localized(metric, 'label')}</span>`;
         if (metric.opensRegulation && regulationVideos.length) {
@@ -239,6 +278,61 @@
       document.getElementById('structureTitle').textContent = LANG === 'en' ? 'Planned Page Structure' : '页面内容框架';
       document.getElementById('structureSummary').textContent = LANG === 'en' ? 'The structure is ready for future functional explanations, technical material, and demonstration media.' : '该页面已为后续功能说明、技术资料与演示内容预留结构。';
       document.getElementById('roadmapGrid').innerHTML = roadmap.map(item => `<article class="roadmap-card"><strong>${item}</strong><span>${LANG === 'en' ? 'Content planned' : '内容待补充'}</span></article>`).join('');
+    }
+
+    function initCustomVideoPlayers() {
+      document.querySelectorAll('[data-custom-video-player]').forEach(player => {
+        if (player.dataset.customVideoReady === 'true') return;
+        player.dataset.customVideoReady = 'true';
+        const video = player.querySelector('video');
+        const toggle = player.querySelector('[data-video-toggle]');
+        const seek = player.querySelector('[data-video-seek]');
+        const time = player.querySelector('[data-video-time]');
+        const mute = player.querySelector('[data-video-mute]');
+        const fullscreen = player.querySelector('[data-video-fullscreen]');
+        const icon = toggle.querySelector('path');
+        const volumeIcon = mute.querySelector('path');
+        const formatTime = seconds => {
+          if (!Number.isFinite(seconds)) return '0:00';
+          const minutes = Math.floor(seconds / 60);
+          const remaining = Math.floor(seconds % 60);
+          return `${minutes}:${String(remaining).padStart(2, '0')}`;
+        };
+        const updateTimeline = () => {
+          const duration = Number.isFinite(video.duration) ? video.duration : 0;
+          seek.max = duration;
+          seek.value = Math.min(video.currentTime || 0, duration);
+          time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
+        };
+        const updatePlayState = () => {
+          icon.setAttribute('d', video.paused ? 'M8 5v14l11-7z' : 'M7 5h4v14H7zm6 0h4v14h-4z');
+          toggle.setAttribute('aria-label', video.paused ? (LANG === 'en' ? 'Play video' : '播放视频') : (LANG === 'en' ? 'Pause video' : '暂停视频'));
+        };
+        const updateMuteState = () => {
+          volumeIcon.setAttribute('d', video.muted || video.volume === 0 ? 'M4 9v6h4l5 4V5L8 9H4zm11.5 1.1 1.4-1.4 5 5-1.4 1.4-5-5zm5-1.4 1.4 1.4-5 5-1.4-1.4 5-5z' : 'M4 9v6h4l5 4V5L8 9H4zm11.5-.5a5 5 0 0 1 0 7l-1.4-1.4a3 3 0 0 0 0-4.2l1.4-1.4zm2.8-2.8a9 9 0 0 1 0 12.6l-1.4-1.4a7 7 0 0 0 0-9.8l1.4-1.4z');
+          mute.setAttribute('aria-label', video.muted || video.volume === 0 ? (LANG === 'en' ? 'Unmute video' : '打开视频声音') : (LANG === 'en' ? 'Mute video' : '关闭视频声音'));
+        };
+        toggle.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+        video.addEventListener('click', () => video.paused ? video.play().catch(() => {}) : video.pause());
+        seek.addEventListener('input', () => { video.currentTime = Number(seek.value); updateTimeline(); });
+        mute.addEventListener('click', () => { video.muted = !video.muted; updateMuteState(); });
+        fullscreen.addEventListener('click', () => {
+          if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+          else if (player.requestFullscreen) player.requestFullscreen().catch(() => {});
+        });
+        video.addEventListener('loadedmetadata', updateTimeline);
+        video.addEventListener('durationchange', updateTimeline);
+        video.addEventListener('timeupdate', updateTimeline);
+        video.addEventListener('play', updatePlayState);
+        video.addEventListener('pause', updatePlayState);
+        video.addEventListener('volumechange', updateMuteState);
+        document.addEventListener('fullscreenchange', () => {
+          fullscreen.setAttribute('aria-label', document.fullscreenElement ? (LANG === 'en' ? 'Exit fullscreen' : '退出全屏') : (LANG === 'en' ? 'Enter fullscreen' : '进入全屏'));
+        });
+        updateTimeline();
+        updatePlayState();
+        updateMuteState();
+      });
     }
 
     function initAlgorithmRegulationGallery(videos, galleryTitle, launch) {
